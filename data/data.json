@@ -1,0 +1,1110 @@
+[
+  {
+    "id": "Amersfort",
+    "name": "Амерсфорт",
+    "purpose": {
+      "prisoners": true,
+      "transit": true
+    },
+    "country": {
+      "caption": "Нидерланды",
+      "id": "NL"
+    },
+    "content": "Нацистский концлагерь на территории оккупированного королевства Нидерланды. Действовал с 1941 по 1945. За это время через него прошли более 35 000 человек.  Первыми узниками лагеря стали 200 голландских коммунистов, затем сюда свозили евреев, участников Сопротивления и уклонявшихся от принудительных работ, а также военнопленных. Многих затем отправляли в Бухенвальд и другие концлагеря. В сентябре 1941 в Амерсфорт доставили 101 воина-узбека, взятых в плен в боях под Смоленском. Возможно, среди них были представители и других народов советской Средней Азии, но установить их личности не удалось до сих пор. Хотя немцы сожгли архив лагеря перед отступлением, остались свидетели из числа лагерной охраны и выживших заключенных, чьи воспоминания помогли голландскому журналисту Ремко Рейдингу узнать кое-что о судьбе этих людей. Так первые три дня в лагере их держали без еды под открытым небом. Нацисты планировали снять пропагандистский фильм о «варварах и недочеловеках» и готовили сцену, в которой оголодавшие пленники будут драться за брошенный хлеб. К разочарованию съемочной группы все вышло иначе – один из пленников разделил буханку на равные части, в то время как остальные терпеливо ждали. Условия содержания в лагере для всех узников были нечеловеческими, однако к пленным узбекам относились с еще большей жестокостью, чем к остальным заключенным: их морили голодом, зверски избивали и издевались, заставляли выполнять самую худшую работу, например, перетаскивать кирпичи, песок или бревна в мороз. Двадцать четыре из сто одного умерли от голода и жестокого обращения, остальные семьдесят семь в апреле 1942-го были расстреляны в ближайшем лесу, поскольку больше не могли работать. Перед казнью им сказали, что их перевезут в лагерь на юг Франции, где им будет теплее.",
+    "deathToll": 652,
+    "area": 0,
+    "yearOfFoundation": 1941,
+    "yearOfLiquidation": 1945,
+    "createdBy": "",
+    "additionalInformation": "",
+    "additionalPurpose": "",
+    "massPeopleDestruction": true
+  }, {
+    "id": "Arbajtsdorf",
+    "name": "Арбайтсдорф",
+    "purpose": {
+      "labor": true
+    },
+    "country": {
+      "caption": "Германия",
+      "id": "DE"
+    },
+    "content": "",
+    "deathToll": 0,
+    "area": 0,
+    "yearOfFoundation": 0,
+    "yearOfLiquidation": 0,
+    "createdBy": "",
+    "additionalInformation": "",
+    "additionalPurpose": "",
+    "massPeopleDestruction": false
+  }, {
+    "id": "Aushvic",
+    "name": "Аушвиц/Освенцим (Аушвиц I, Аушвиц II/Биркенау)",
+    "purpose": {
+      "death": true,
+      "labor": true
+    },
+    "country": {
+      "caption": "Верхняя Силезия (совр. Польша)",
+      "id": "PL"
+    },
+    "content": "",
+    "deathToll": 0,
+    "area": 0,
+    "yearOfFoundation": 0,
+    "yearOfLiquidation": 0,
+    "createdBy": "",
+    "additionalInformation": "",
+    "additionalPurpose": "",
+    "massPeopleDestruction": false
+  }, {
+    "id": "Banica",
+    "name": "Баница",
+    "purpose": {
+      "death": true
+    },
+    "country": {
+      "caption": "Югославия (совр. Сербия)",
+      "id": "UG"
+    },
+    "content": "",
+    "deathToll": 0,
+    "area": 0,
+    "yearOfFoundation": 0,
+    "yearOfLiquidation": 0,
+    "createdBy": "",
+    "additionalInformation": "",
+    "additionalPurpose": "",
+    "massPeopleDestruction": false
+  }, {
+    "id": "Belzhec",
+    "name": "Белжец",
+    "purpose": {
+      "death": true
+    },
+    "country": {
+      "caption": "Польша",
+      "id": "PL"
+    },
+    "content": "",
+    "deathToll": 0,
+    "area": 0,
+    "yearOfFoundation": 0,
+    "yearOfLiquidation": 0,
+    "createdBy": "",
+    "additionalInformation": "",
+    "additionalPurpose": "",
+    "massPeopleDestruction": false
+  }, {
+    "id": "BergenBelzen",
+    "name": "Берген-Бельзен",
+    "purpose": {
+      "concentration": true,
+      "prisoners": true
+    },
+    "country": {
+      "caption": "Германия",
+      "id": "DE"
+    },
+    "content": "",
+    "deathToll": 0,
+    "area": 0,
+    "yearOfFoundation": 0,
+    "yearOfLiquidation": 0,
+    "createdBy": "",
+    "additionalInformation": "",
+    "additionalPurpose": "",
+    "massPeopleDestruction": false
+  }, {
+    "id": "BerlinMarcan",
+    "name": "Берлин-Марцан",
+    "purpose": {
+      "concentration": true
+    },
+    "country": {
+      "caption": "Германия",
+      "id": "DE"
+    },
+    "content": "",
+    "deathToll": 0,
+    "area": 0,
+    "yearOfFoundation": 0,
+    "yearOfLiquidation": 0,
+    "createdBy": "",
+    "additionalInformation": "",
+    "additionalPurpose": "",
+    "massPeopleDestruction": false
+  }, {
+    "id": "Bogdanovka",
+    "name": "Богдановка",
+    "purpose": {
+      "concentration": true
+    },
+    "country": {
+      "caption": "СССР (совр. Украина)",
+      "id": "UA"
+    },
+    "content": "",
+    "deathToll": 0,
+    "area": 0,
+    "yearOfFoundation": 0,
+    "yearOfLiquidation": 0,
+    "createdBy": "",
+    "additionalInformation": "",
+    "additionalPurpose": "",
+    "massPeopleDestruction": false
+  }, {
+    "id": "Bocen",
+    "name": "Боцен (Больцано)",
+    "purpose": {
+      "concentration": true,
+      "transit": true
+    },
+    "country": {
+      "caption": "Италия",
+      "id": "IT"
+    },
+    "content": "",
+    "deathToll": 0,
+    "area": 0,
+    "yearOfFoundation": 0,
+    "yearOfLiquidation": 0,
+    "createdBy": "",
+    "additionalInformation": "",
+    "additionalPurpose": "",
+    "massPeopleDestruction": false
+  }, {
+    "id": "Brajtenau",
+    "name": "Брайтенау",
+    "purpose": {
+      "labor": true
+    },
+    "country": {
+      "caption": "Германия",
+      "id": "DE"
+    },
+    "content": "",
+    "deathToll": 0,
+    "area": 0,
+    "yearOfFoundation": 0,
+    "yearOfLiquidation": 0,
+    "createdBy": "",
+    "additionalInformation": "",
+    "additionalPurpose": "",
+    "massPeopleDestruction": false
+  }, {
+    "id": "Bretvet",
+    "name": "Бретвет",
+    "purpose": {
+      "concentration": true
+    },
+    "country": {
+      "caption": "Норвегия",
+      "id": "NO"
+    },
+    "content": "",
+    "deathToll": 0,
+    "area": 0,
+    "yearOfFoundation": 0,
+    "yearOfLiquidation": 0,
+    "createdBy": "",
+    "additionalInformation": "",
+    "additionalPurpose": "",
+    "massPeopleDestruction": false
+  }, {
+    "id": "Buhenvald",
+    "name": "Бухенвальд",
+    "purpose": {
+      "concentration": true,
+      "death": true,
+      "labor": true
+    },
+    "country": {
+      "caption": "Германия",
+      "id": "DE"
+    },
+    "content": "",
+    "deathToll": 0,
+    "area": 0,
+    "yearOfFoundation": 0,
+    "yearOfLiquidation": 0,
+    "createdBy": "",
+    "additionalInformation": "",
+    "additionalPurpose": "",
+    "massPeopleDestruction": false
+  }, {
+    "id": "Vajvara",
+    "name": "Ва́йвара",
+    "purpose": {
+      "concentration": true,
+      "labor": true,
+      "prisoners": true,
+      "transit": true
+    },
+    "country": {
+      "caption": "Эстония",
+      "id": "EE"
+    },
+    "content": "",
+    "deathToll": 0,
+    "area": 0,
+    "yearOfFoundation": 0,
+    "yearOfLiquidation": 0,
+    "createdBy": "",
+    "additionalInformation": "",
+    "additionalPurpose": "",
+    "massPeopleDestruction": false
+  }, {
+    "id": "GannoverAlem",
+    "name": "Ганновер-Алем",
+    "purpose": {
+      "concentration": true,
+      "labor": true
+    },
+    "country": {
+      "caption": "Германия",
+      "id": "DE"
+    },
+    "content": "",
+    "deathToll": 0,
+    "area": 0,
+    "yearOfFoundation": 0,
+    "yearOfLiquidation": 0,
+    "createdBy": "",
+    "additionalInformation": "",
+    "additionalPurpose": "",
+    "massPeopleDestruction": false
+  }, {
+    "id": "GannoverLangenhagen",
+    "name": "Ганновер-Лангенхаген",
+    "purpose": {
+      "concentration": true,
+      "labor": true
+    },
+    "country": {
+      "caption": "Германия",
+      "id": "DE"
+    },
+    "content": "",
+    "deathToll": 0,
+    "area": 0,
+    "yearOfFoundation": 0,
+    "yearOfLiquidation": 0,
+    "createdBy": "",
+    "additionalInformation": "",
+    "additionalPurpose": "",
+    "massPeopleDestruction": false
+  }, {
+    "id": "GannoverLimmer",
+    "name": "Ганновер-Лиммер",
+    "purpose": {
+      "concentration": true,
+      "labor": true
+    },
+    "country": {
+      "caption": "Германия",
+      "id": "DE"
+    },
+    "content": "",
+    "deathToll": 0,
+    "area": 0,
+    "yearOfFoundation": 0,
+    "yearOfLiquidation": 0,
+    "createdBy": "",
+    "additionalInformation": "",
+    "additionalPurpose": "",
+    "massPeopleDestruction": false
+  }, {
+    "id": "Gercogenbush",
+    "name": "Герцогенбуш",
+    "purpose": {
+      "concentration": true
+    },
+    "country": {
+      "caption": "Нидерланды",
+      "id": "NL"
+    },
+    "content": "",
+    "deathToll": 0,
+    "area": 0,
+    "yearOfFoundation": 0,
+    "yearOfLiquidation": 0,
+    "createdBy": "",
+    "additionalInformation": "",
+    "additionalPurpose": "",
+    "massPeopleDestruction": false
+  }, {
+    "id": "GrossRozen",
+    "name": "Гросс-Розен",
+    "purpose": {
+      "concentration": true,
+      "labor": true
+    },
+    "country": {
+      "caption": "Нижняя Силезия (совр. Польша)",
+      "id": "PL"
+    },
+    "content": "",
+    "deathToll": 0,
+    "area": 0,
+    "yearOfFoundation": 0,
+    "yearOfLiquidation": 0,
+    "createdBy": "",
+    "additionalInformation": "",
+    "additionalPurpose": "",
+    "massPeopleDestruction": false
+  }, {
+    "id": "Darnickij",
+    "name": "Дарницкий",
+    "purpose": {
+      "concentration": true,
+      "prisoners": true
+    },
+    "country": {
+      "caption": "СССР (совр. Украина)",
+      "id": "UA"
+    },
+    "content": "",
+    "deathToll": 0,
+    "area": 0,
+    "yearOfFoundation": 0,
+    "yearOfLiquidation": 0,
+    "createdBy": "",
+    "additionalInformation": "",
+    "additionalPurpose": "",
+    "massPeopleDestruction": false
+  }, {
+    "id": "DoraMittelbau",
+    "name": "Дора-Миттельбау",
+    "purpose": {
+      "concentration": true,
+      "labor": true
+    },
+    "country": {
+      "caption": "Германия",
+      "id": "DE"
+    },
+    "content": "",
+    "deathToll": 0,
+    "area": 0,
+    "yearOfFoundation": 0,
+    "yearOfLiquidation": 0,
+    "createdBy": "",
+    "additionalInformation": "",
+    "additionalPurpose": "",
+    "massPeopleDestruction": false
+  }, {
+    "id": "Dahau",
+    "name": "Дахау",
+    "purpose": {
+      "concentration": true
+    },
+    "country": {
+      "caption": "Германия",
+      "id": "DE"
+    },
+    "content": "",
+    "deathToll": 0,
+    "area": 0,
+    "yearOfFoundation": 0,
+    "yearOfLiquidation": 0,
+    "createdBy": "",
+    "additionalInformation": "",
+    "additionalPurpose": "",
+    "massPeopleDestruction": false
+  }, {
+    "id": "Dransi",
+    "name": "Дранси",
+    "purpose": {
+      "concentration": true,
+      "transit": true
+    },
+    "country": {
+      "caption": "Франция",
+      "id": "FR"
+    },
+    "content": "",
+    "deathToll": 0,
+    "area": 0,
+    "yearOfFoundation": 0,
+    "yearOfLiquidation": 0,
+    "createdBy": "",
+    "additionalInformation": "",
+    "additionalPurpose": "",
+    "massPeopleDestruction": false
+  }, {
+    "id": "Zaksenhauzen",
+    "name": "Заксенхаузен",
+    "purpose": {
+      "concentration": true,
+      "death": true
+    },
+    "country": {
+      "caption": "Германия",
+      "id": "DE"
+    },
+    "content": "",
+    "deathToll": 0,
+    "area": 0,
+    "yearOfFoundation": 0,
+    "yearOfLiquidation": 0,
+    "createdBy": "",
+    "additionalInformation": "",
+    "additionalPurpose": "",
+    "massPeopleDestruction": false
+  }, {
+    "id": "Kajzervald",
+    "name": "Кайзервальд",
+    "purpose": {
+      "labor": true
+    },
+    "country": {
+      "caption": "СССР (совр. Латвия)",
+      "id": "LV"
+    },
+    "content": "",
+    "deathToll": 0,
+    "area": 0,
+    "yearOfFoundation": 0,
+    "yearOfLiquidation": 0,
+    "createdBy": "",
+    "additionalInformation": "",
+    "additionalPurpose": "",
+    "massPeopleDestruction": false
+  }, {
+    "id": "Kaunasskij",
+    "name": "Каунасский",
+    "purpose": {
+      "concentration": true
+    },
+    "country": {
+      "caption": "СССР (совр. Литва)",
+      "id": "LT"
+    },
+    "content": "",
+    "deathToll": 0,
+    "area": 0,
+    "yearOfFoundation": 0,
+    "yearOfLiquidation": 0,
+    "createdBy": "",
+    "additionalInformation": "",
+    "additionalPurpose": "",
+    "massPeopleDestruction": false
+  }, {
+    "id": "Klooga",
+    "name": "Клоога",
+    "purpose": {
+      "concentration": true,
+      "death": true,
+      "labor": true
+    },
+    "country": {
+      "caption": "Эстония",
+      "id": "EE"
+    },
+    "content": "",
+    "deathToll": 0,
+    "area": 0,
+    "yearOfFoundation": 0,
+    "yearOfLiquidation": 0,
+    "createdBy": "",
+    "additionalInformation": "",
+    "additionalPurpose": "",
+    "massPeopleDestruction": false
+  }, {
+    "id": "Kurtengof",
+    "name": "Куртенгоф",
+    "purpose": {
+      "concentration": true,
+      "death": true,
+      "labor": true
+    },
+    "country": {
+      "caption": "СССР (совр. Латвия)",
+      "id": "LV"
+    },
+    "content": "",
+    "deathToll": 0,
+    "area": 0,
+    "yearOfFoundation": 0,
+    "yearOfLiquidation": 0,
+    "createdBy": "",
+    "additionalInformation": "",
+    "additionalPurpose": "",
+    "massPeopleDestruction": false
+  }, {
+    "id": "Majdanek",
+    "name": "Майданек",
+    "purpose": {
+      "death": true,
+      "labor": true,
+      "prisoners": true
+    },
+    "country": {
+      "caption": "Польша",
+      "id": "PL"
+    },
+    "content": "",
+    "deathToll": 0,
+    "area": 0,
+    "yearOfFoundation": 0,
+    "yearOfLiquidation": 0,
+    "createdBy": "",
+    "additionalInformation": "",
+    "additionalPurpose": "",
+    "massPeopleDestruction": false
+  }, {
+    "id": "MalyjTrostenec",
+    "name": "Малый Тростенец",
+    "purpose": {
+      "death": true,
+      "labor": true
+    },
+    "country": {
+      "caption": "СССР (совр. Беларусь)",
+      "id": "BY"
+    },
+    "content": "",
+    "deathToll": 0,
+    "area": 0,
+    "yearOfFoundation": 0,
+    "yearOfLiquidation": 0,
+    "createdBy": "",
+    "additionalInformation": "",
+    "additionalPurpose": "",
+    "massPeopleDestruction": false
+  }, {
+    "id": "Malhov",
+    "name": "Мальхов",
+    "purpose": {
+      "concentration": true,
+      "labor": true
+    },
+    "country": {
+      "caption": "Германия",
+      "id": "DE"
+    },
+    "content": "",
+    "deathToll": 0,
+    "area": 0,
+    "yearOfFoundation": 0,
+    "yearOfLiquidation": 0,
+    "createdBy": "",
+    "additionalInformation": "",
+    "additionalPurpose": "",
+    "massPeopleDestruction": false
+  }, {
+    "id": "Mauthauzen",
+    "name": "Маутхаузен",
+    "purpose": {
+      "concentration": true,
+      "labor": true
+    },
+    "country": {
+      "caption": "Германия (совр. Австрия)",
+      "id": "AT"
+    },
+    "content": "",
+    "deathToll": 0,
+    "area": 0,
+    "yearOfFoundation": 0,
+    "yearOfLiquidation": 0,
+    "createdBy": "",
+    "additionalInformation": "",
+    "additionalPurpose": "",
+    "massPeopleDestruction": false
+  }, {
+    "id": "MillerovskayaYama",
+    "name": "Миллеровская яма",
+    "purpose": {
+      "concentration": true,
+      "prisoners": true,
+      "transit": true
+    },
+    "country": {
+      "caption": "СССР (совр Россия)",
+      "id": "RU"
+    },
+    "content": "",
+    "deathToll": 0,
+    "area": 0,
+    "yearOfFoundation": 0,
+    "yearOfLiquidation": 0,
+    "createdBy": "",
+    "additionalInformation": "",
+    "additionalPurpose": "",
+    "massPeopleDestruction": false
+  }, {
+    "id": "NacvejlerShtrutgof",
+    "name": "Нацвейлер-Штрутгоф",
+    "purpose": {
+      "labor": true
+    },
+    "country": {
+      "caption": "Германия, Франция",
+      "id": "GE"
+    },
+    "content": "",
+    "deathToll": 0,
+    "area": 0,
+    "yearOfFoundation": 0,
+    "yearOfLiquidation": 0,
+    "createdBy": "",
+    "additionalInformation": "",
+    "additionalPurpose": "",
+    "massPeopleDestruction": false
+  }, {
+    "id": "Nojengamme",
+    "name": "Нойенгамме",
+    "purpose": {
+      "concentration": true,
+      "labor": true
+    },
+    "country": {
+      "caption": "Германия",
+      "id": "DE"
+    },
+    "content": "",
+    "deathToll": 0,
+    "area": 0,
+    "yearOfFoundation": 0,
+    "yearOfLiquidation": 0,
+    "createdBy": "",
+    "additionalInformation": "",
+    "additionalPurpose": "",
+    "massPeopleDestruction": false
+  }, {
+    "id": "Ozarichi",
+    "name": "Озаричи",
+    "purpose": {
+      "concentration": true
+    },
+    "country": {
+      "caption": "Беларусь",
+      "id": "BY"
+    },
+    "content": "",
+    "deathToll": 0,
+    "area": 0,
+    "yearOfFoundation": 0,
+    "yearOfLiquidation": 0,
+    "createdBy": "",
+    "additionalInformation": "",
+    "additionalPurpose": "",
+    "massPeopleDestruction": false
+  }, {
+    "id": "Olderni",
+    "name": "Олдерни",
+    "purpose": {
+      "concentration": true,
+      "labor": true
+    },
+    "country": {
+      "caption": "Великобритания",
+      "id": "GB"
+    },
+    "content": "",
+    "deathToll": 0,
+    "area": 0,
+    "yearOfFoundation": 0,
+    "yearOfLiquidation": 0,
+    "createdBy": "",
+    "additionalInformation": "",
+    "additionalPurpose": "",
+    "massPeopleDestruction": false
+  }, {
+    "id": "Ordruf",
+    "name": "Ордруф",
+    "purpose": {
+      "labor": true
+    },
+    "country": {
+      "caption": "Германия",
+      "id": "DE"
+    },
+    "content": "",
+    "deathToll": 0,
+    "area": 0,
+    "yearOfFoundation": 0,
+    "yearOfLiquidation": 0,
+    "createdBy": "",
+    "additionalInformation": "",
+    "additionalPurpose": "",
+    "massPeopleDestruction": false
+  }, {
+    "id": "Plashov",
+    "name": "Плашов",
+    "purpose": {
+      "concentration": true,
+      "labor": true
+    },
+    "country": {
+      "caption": "Польша",
+      "id": "PL"
+    },
+    "content": "",
+    "deathToll": 0,
+    "area": 0,
+    "yearOfFoundation": 0,
+    "yearOfLiquidation": 0,
+    "createdBy": "",
+    "additionalInformation": "",
+    "additionalPurpose": "",
+    "massPeopleDestruction": false
+  }, {
+    "id": "Ravensbryuk",
+    "name": "Равенсбрюк",
+    "purpose": {
+      "concentration": true,
+      "labor": true
+    },
+    "country": {
+      "caption": "Германия",
+      "id": "DE"
+    },
+    "content": "",
+    "deathToll": 0,
+    "area": 0,
+    "yearOfFoundation": 0,
+    "yearOfLiquidation": 0,
+    "createdBy": "",
+    "additionalInformation": "",
+    "additionalPurpose": "",
+    "massPeopleDestruction": false
+  }, {
+    "id": "Sobibor",
+    "name": "Собибор",
+    "purpose": {
+      "death": true
+    },
+    "country": {
+      "caption": "Польша",
+      "id": "PL"
+    },
+    "content": "",
+    "deathToll": 0,
+    "area": 0,
+    "yearOfFoundation": 0,
+    "yearOfLiquidation": 0,
+    "createdBy": "",
+    "additionalInformation": "",
+    "additionalPurpose": "",
+    "massPeopleDestruction": false
+  }, {
+    "id": "Syreckij",
+    "name": "Сырецкий концлагерь",
+    "purpose": {
+      "concentration": true
+    },
+    "country": {
+      "caption": "СССР (совр. Украина)",
+      "id": "UA"
+    },
+    "content": "",
+    "deathToll": 0,
+    "area": 0,
+    "yearOfFoundation": 0,
+    "yearOfLiquidation": 0,
+    "createdBy": "",
+    "additionalInformation": "",
+    "additionalPurpose": "",
+    "massPeopleDestruction": false
+  }, {
+    "id": "Terezienshtadt",
+    "name": "Терезиенштадт",
+    "purpose": {
+      "concentration": true,
+      "transit": true
+    },
+    "country": {
+      "caption": "Чехия",
+      "id": "CZ"
+    },
+    "content": "",
+    "deathToll": 0,
+    "area": 0,
+    "yearOfFoundation": 0,
+    "yearOfLiquidation": 0,
+    "createdBy": "",
+    "additionalInformation": "",
+    "additionalPurpose": "",
+    "massPeopleDestruction": false
+  }, {
+    "id": "Travniki",
+    "name": "Травники",
+    "purpose": {
+      "concentration": true,
+      "labor": true,
+      "prisoners": true,
+      "transit": true
+    },
+    "country": {
+      "caption": "Польша",
+      "id": "PL"
+    },
+    "content": "",
+    "deathToll": 0,
+    "area": 0,
+    "yearOfFoundation": 0,
+    "yearOfLiquidation": 0,
+    "createdBy": "",
+    "additionalInformation": "",
+    "additionalPurpose": "",
+    "massPeopleDestruction": false
+  }, {
+    "id": "Treblinka1",
+    "name": "Треблинка-1",
+    "purpose": {
+      "labor": true
+    },
+    "country": {
+      "caption": "Польша",
+      "id": "PL"
+    },
+    "content": "",
+    "deathToll": 0,
+    "area": 0,
+    "yearOfFoundation": 0,
+    "yearOfLiquidation": 0,
+    "createdBy": "",
+    "additionalInformation": "",
+    "additionalPurpose": "",
+    "massPeopleDestruction": false
+  }, {
+    "id": "Treblinka2",
+    "name": "Треблинка-2",
+    "purpose": {
+      "death": true
+    },
+    "country": {
+      "caption": "Польша",
+      "id": "PL"
+    },
+    "content": "",
+    "deathToll": 0,
+    "area": 0,
+    "yearOfFoundation": 0,
+    "yearOfLiquidation": 0,
+    "createdBy": "",
+    "additionalInformation": "",
+    "additionalPurpose": "",
+    "massPeopleDestruction": false
+  }, {
+    "id": "Tromsyo",
+    "name": "Тромсё",
+    "purpose": {
+      "death": true
+    },
+    "country": {
+      "caption": "Норвегия",
+      "id": "NO"
+    },
+    "content": "",
+    "deathToll": 0,
+    "area": 0,
+    "yearOfFoundation": 0,
+    "yearOfLiquidation": 0,
+    "createdBy": "",
+    "additionalInformation": "",
+    "additionalPurpose": "",
+    "massPeopleDestruction": false
+  }, {
+    "id": "Falstad",
+    "name": "Фальстад",
+    "purpose": {
+      "concentration": true,
+      "transit": true
+    },
+    "country": {
+      "caption": "Норвегия",
+      "id": "NO"
+    },
+    "content": "",
+    "deathToll": 0,
+    "area": 0,
+    "yearOfFoundation": 0,
+    "yearOfLiquidation": 0,
+    "createdBy": "",
+    "additionalInformation": "",
+    "additionalPurpose": "",
+    "massPeopleDestruction": false
+  }, {
+    "id": "Finskie",
+    "name": "Финские концлагеря",
+    "purpose": {
+      "concentration": true,
+      "transit": true
+    },
+    "country": {
+      "caption": "Финляндия, Карелия",
+      "id": "FI"
+    },
+    "content": "",
+    "deathToll": 0,
+    "area": 0,
+    "yearOfFoundation": 0,
+    "yearOfLiquidation": 0,
+    "createdBy": "",
+    "additionalInformation": "",
+    "additionalPurpose": "",
+    "massPeopleDestruction": false
+  }, {
+    "id": "Flossenbyurg",
+    "name": "Флоссенбюрг",
+    "purpose": {
+      "concentration": true,
+      "death": true,
+      "labor": true
+    },
+    "country": {
+      "caption": "Германия",
+      "id": "DE"
+    },
+    "content": "",
+    "deathToll": 0,
+    "area": 0,
+    "yearOfFoundation": 0,
+    "yearOfLiquidation": 0,
+    "createdBy": "",
+    "additionalInformation": "",
+    "additionalPurpose": "",
+    "massPeopleDestruction": false
+  }, {
+    "id": "Hammelburg",
+    "name": "Хаммельбург",
+    "purpose": {
+      "prisoners": true
+    },
+    "country": {
+      "caption": "Германия",
+      "id": "DE"
+    },
+    "content": "",
+    "deathToll": 0,
+    "area": 0,
+    "yearOfFoundation": 0,
+    "yearOfLiquidation": 0,
+    "createdBy": "",
+    "additionalInformation": "",
+    "additionalPurpose": "",
+    "massPeopleDestruction": false
+  }, {
+    "id": "Helmno",
+    "name": "Хелмно",
+    "purpose": {
+      "death": true
+    },
+    "country": {
+      "caption": "Польша",
+      "id": "PL"
+    },
+    "content": "",
+    "deathToll": 0,
+    "area": 0,
+    "yearOfFoundation": 0,
+    "yearOfLiquidation": 0,
+    "createdBy": "",
+    "additionalInformation": "",
+    "additionalPurpose": "",
+    "massPeopleDestruction": false
+  }, {
+    "id": "Shtuttgof",
+    "name": "Штуттгоф",
+    "purpose": {
+      "concentration": true
+    },
+    "country": {
+      "caption": "Польша",
+      "id": "PL"
+    },
+    "content": "",
+    "deathToll": 0,
+    "area": 0,
+    "yearOfFoundation": 0,
+    "yearOfLiquidation": 0,
+    "createdBy": "",
+    "additionalInformation": "",
+    "additionalPurpose": "",
+    "massPeopleDestruction": false
+  }, {
+    "id": "Estervegen",
+    "name": "Эстервеген",
+    "purpose": {
+      "concentration": true
+    },
+    "country": {
+      "caption": "Германия",
+      "id": "DE"
+    },
+    "content": "",
+    "deathToll": 0,
+    "area": 0,
+    "yearOfFoundation": 0,
+    "yearOfLiquidation": 0,
+    "createdBy": "",
+    "additionalInformation": "",
+    "additionalPurpose": "",
+    "massPeopleDestruction": false
+  }, {
+    "id": "Yagala",
+    "name": "Ягала",
+    "purpose": {
+      "death": true,
+      "labor": true
+    },
+    "country": {
+      "caption": "Эстония",
+      "id": "EE"
+    },
+    "content": "",
+    "deathToll": 0,
+    "area": 0,
+    "yearOfFoundation": 0,
+    "yearOfLiquidation": 0,
+    "createdBy": "",
+    "additionalInformation": "",
+    "additionalPurpose": "",
+    "massPeopleDestruction": false
+  }, {
+    "id": "Yanovskij",
+    "name": "Яновский",
+    "purpose": {
+      "concentration": true,
+      "death": true,
+      "labor": true
+    },
+    "country": {
+      "caption": "Украина",
+      "id": "UA"
+    },
+    "content": "",
+    "deathToll": 0,
+    "area": 0,
+    "yearOfFoundation": 0,
+    "yearOfLiquidation": 0,
+    "createdBy": "",
+    "additionalInformation": "",
+    "additionalPurpose": "",
+    "massPeopleDestruction": false
+  }, {
+    "id": "Oranienburg",
+    "name": "Ораниенбург",
+    "purpose": {
+      "concentration": true
+    },
+    "country": {
+      "caption": "Германия",
+      "id": "DE"
+    },
+    "content": "",
+    "deathToll": 0,
+    "area": 0,
+    "yearOfFoundation": 0,
+    "yearOfLiquidation": 0,
+    "createdBy": "",
+    "additionalInformation": "",
+    "additionalPurpose": "",
+    "massPeopleDestruction": false
+  }
+]

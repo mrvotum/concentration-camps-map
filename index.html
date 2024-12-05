@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sass.js/0.9.12/sass.sync.min.js"></script>
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/dropdown.css">
+    <link rel="stylesheet" type="scss" href="./css/dropdown.scss">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul id="filters" class="filters">
+        <li class="dropdown" id="camp-death" filter="death">
+            <button class="dropdown__toggle">
+                <span class="dropdown__ico">
+                    <img src="./i/ico_camp_death.png" srcset="./i/ico_camp_death_2x.png 2x" alt="Лагерь смерти">
+                </span>
+                <span class="dropdown__caption">Лагеря смерти</span>
+                <div class="dropdown__arrow">
+                    <img src="./i/arrow.png" srcset="./i/arrow_2x.png 2x" alt="Toggle arrow">
+                </div>
+            </button>
+            <ol class="dropdown__content"></ol>
+        </li>
+        <li class="dropdown" id="camp-concentration" filter="concentration">
+            <button class="dropdown__toggle">
+                <span class="dropdown__ico">
+                    <img src="./i/ico_camp_concentration.png" srcset="./i/ico_camp_concentration_2x.png 2x" alt="Лагеря концентрационные">
+                </span>
+                <span class="dropdown__caption">Лагеря концентрационные</span>
+                <div class="dropdown__arrow">
+                    <img src="./i/arrow.png" srcset="./i/arrow_2x.png 2x" alt="Toggle arrow">
+                </div>
+            </button>
+            <ol class="dropdown__content"></ol>
+        </li>
+        <li class="dropdown" id="camp-labor" filter="labor">
+            <button class="dropdown__toggle">
+                <span class="dropdown__ico">
+                    <img src="./i/ico_camp_labor.png" srcset="./i/ico_camp_labor_2x.png 2x" alt="Лагеря трудовые">
+                </span>
+                <span class="dropdown__caption">Лагеря трудовые</span>
+                <div class="dropdown__arrow">
+                    <img src="./i/arrow.png" srcset="./i/arrow_2x.png 2x" alt="Toggle arrow">
+                </div>
+            </button>
+            <ol class="dropdown__content"></ol>
+        </li>
+        <li class="dropdown" id="camp-prisoners" filter="prisoners">
+         <button class="dropdown__toggle">
+             <span class="dropdown__ico">
+                 <img src="./i/ico_camp_prisoners.png" srcset="./i/ico_camp_prisoners_2x.png 2x" alt="Лагеря для военнопленных">
+             </span>
+             <span class="dropdown__caption">Лагеря для военнопленных</span>
+             <div class="dropdown__arrow">
+                 <img src="./i/arrow.png" srcset="./i/arrow_2x.png 2x" alt="Toggle arrow">
+             </div>
+         </button>
+         <ol class="dropdown__content"></ol>
+     </li>
+     <li class="dropdown" id="camp-transit" filter="transit">
+         <button class="dropdown__toggle">
+             <span class="dropdown__ico">
+                 <img src="./i/ico_camp_transit.png" srcset="./i/ico_camp_transit_2x.png 2x" alt="Лагеря транзитные">
+             </span>
+             <span class="dropdown__caption">Лагеря транзитные</span>
+             <div class="dropdown__arrow">
+                 <img src="./i/arrow.png" srcset="./i/arrow_2x.png 2x" alt="Toggle arrow">
+             </div>
+         </button>
+         <ol class="dropdown__content"></ol>
+     </li>
+     <li class="dropdown" id="camp-countries" filter="countries">
+         <button class="dropdown__toggle">
+             <span class="dropdown__ico">
+                 <img src="./i/ico_camp_by_countries.png" srcset="./i/ico_camp_by_countries_2x.png 2x" alt="Лагеря по странам">
+             </span>
+             <span class="dropdown__caption">Лагеря по странам</span>
+             <div class="dropdown__arrow">
+                 <img src="./i/arrow.png" srcset="./i/arrow_2x.png 2x" alt="Toggle arrow">
+             </div>
+         </button>
+         <ol class="dropdown__content"> </ol>
+     </li>
+    </ul>
+</body>
+<script src="./js/dropdown.js"></script>
+</html>
