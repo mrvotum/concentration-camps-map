@@ -127,7 +127,7 @@ const data = fetch("./data/data.json")
 	.then((response) => response.json())
 	.then((data) => createJson(data));
 
-// dropdown
+// filters
 const showCampsInCountry = (id) => {
 	const country = map.getElementById(id);
 
@@ -136,89 +136,50 @@ const showCampsInCountry = (id) => {
 	country.classList.add('map__country--is-active');
 };
 
-const showCampsByFilter = (id, filter) => {
-	console.log(id);
-	console.log(filter);
-};
-
-const createDropdownLiEl = (id, content, filter) => {
-	const buttonEl = document.createElement("button");
-	buttonEl.id = id;
-	buttonEl.className = "dropdown__element";
-	buttonEl.type = "button";
-	buttonEl.textContent = content;
-	buttonEl.addEventListener("click", () => {
-		if (filter) {
-			showCampsByFilter(id, filter);
-		} else {
-			showCampsInCountry(id);
-		}
-	});
-
-	const liEl = document.createElement("li");
-	// liEl.id = this.idCount;
-
-	// liEl.setAttribute('messageType', 'regular');
-
-	// liEl.innerHTML = `<button type="button" class="name">${content}</button>`;
-
-	liEl.appendChild(buttonEl);
-
-	return liEl;
-};
-
-const createDropdownContent = (dropdown) => {
-	const id = dropdown.getAttribute("id");
-	const filter = dropdown.getAttribute("filter");
-	const contentBlock = dropdown.querySelector(".dropdown__content");
-
-	// Выводим все лагеря, соответствующие фильтру
-	if (id === "camp-countries") {
-		countries.map((data) => {
-			contentBlock.appendChild(createDropdownLiEl(data.id, data.caption));
+const hideAllCamps = (isReverse) => {
+	if (isReverse) {
+		allCamps.forEach((camp) => {
+			camp.classList.remove('map__camp--is-hidden');
 		});
 	} else {
-		jsonData.map((data) => {
-			if (data.purpose[filter]) {
-				contentBlock.appendChild(createDropdownLiEl(data.id, data.name, filter));
-			}
+		allCamps.forEach((camp) => {
+			camp.classList.add('map__camp--is-hidden');
 		});
-	}
-
-	dropdown.setAttribute("hasContent", true);
-};
-
-function dropdownToggler(dropdown) {
-	closeAllDropdowns(dropdown);
-	dropdown.classList.toggle("dropdown--is-open");
-
-	if (!dropdown.getAttribute("hasContent")) {
-		createDropdownContent(dropdown);
-	}
+	};
 }
 
-const allDropdowns = document.querySelectorAll(".dropdown");
+const showCampsByFilter = (filter) => {
+	console.log(`Активный фильтр: "${filter}"`);
 
-const closeAllDropdowns = (exception) => {
-	allDropdowns.forEach((el) => {
-		if (el !== exception) {
-			el.classList.remove("dropdown--is-open");
+	if (filter !== 'all') {
+		hideAllCamps();
+	} else {
+		hideAllCamps(true);
+		return;
+	};
+
+	console.log('Показываем по фильтру');
+	jsonData.filter((camp) => {
+		if (camp.purpose[filter]) {
+			showCampByFilter(camp.id);
 		}
 	});
 };
 
-allDropdowns.forEach((el) => {
+const showCampByFilter = (id) => {
+	allCamps.filter((camp) => {
+		if (camp.id === id) {
+			camp.classList.remove('map__camp--is-hidden');
+		}
+	});
+};
+
+const allFiltersButtons = document.querySelectorAll('[filter]');
+const allCamps = Array.from(map.querySelectorAll('.map__camp'));
+
+allFiltersButtons.forEach((el) => {
 	el.addEventListener("click", () => {
-		dropdownToggler(el);
+		showCampsByFilter(el.getAttribute('filter'))
 	});
 });
-
-document.addEventListener("click", (event) => {
-	if (
-		event.target !== "a" &&
-		!event.target.classList.contains("dropdown__toggle")
-	) {
-		closeAllDropdowns();
-	}
-});
-// dropdown
+// filters

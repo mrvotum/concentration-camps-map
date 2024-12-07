@@ -20,84 +20,60 @@
     </div>
     <div class="main__content">
         <ul id="filters" class="filters">
-            <li class="dropdown" id="camp-death" filter="death">
-                <button class="dropdown__toggle">
-                    <span class="dropdown__ico">
+            <li class="filters__filter">
+                <button class="filters-control" id="camp-death" filter="death">
+                    <span class="filters-control__ico">
                         <img src="./i/ico_camp_death.png" srcset="./i/ico_camp_death_2x.png 2x" alt="Лагерь смерти">
                     </span>
-                    <span class="dropdown__caption">Лагеря смерти</span>
-                    <div class="dropdown__arrow">
-                        <img src="./i/arrow.png" srcset="./i/arrow_2x.png 2x" alt="Toggle arrow">
-                    </div>
+                    <span class="filters-control__caption">Лагеря смерти</span>
                 </button>
-                <ol class="dropdown__content"></ol>
             </li>
-            <li class="dropdown" id="camp-concentration" filter="concentration">
-                <button class="dropdown__toggle">
-                    <span class="dropdown__ico">
+            <li class="filters__filter">
+                <button class="filters-control" id="camp-concentration" filter="concentration">
+                    <span class="filters-control__ico">
                         <img src="./i/ico_camp_concentration.png" srcset="./i/ico_camp_concentration_2x.png 2x" alt="Лагеря концентрационные">
                     </span>
-                    <span class="dropdown__caption">Лагеря концентрационные</span>
-                    <div class="dropdown__arrow">
-                        <img src="./i/arrow.png" srcset="./i/arrow_2x.png 2x" alt="Toggle arrow">
-                    </div>
+                    <span class="filters-control__caption">Лагеря концентрационные</span>
                 </button>
-                <ol class="dropdown__content"></ol>
             </li>
-            <li class="dropdown" id="camp-labor" filter="labor">
-                <button class="dropdown__toggle">
-                    <span class="dropdown__ico">
+            <li class="filters__filter">
+                <button class="filters-control" id="camp-labor" filter="labor">
+                    <span class="filters-control__ico">
                         <img src="./i/ico_camp_labor.png" srcset="./i/ico_camp_labor_2x.png 2x" alt="Лагеря трудовые">
                     </span>
-                    <span class="dropdown__caption">Лагеря трудовые</span>
-                    <div class="dropdown__arrow">
-                        <img src="./i/arrow.png" srcset="./i/arrow_2x.png 2x" alt="Toggle arrow">
-                    </div>
+                    <span class="filters-control__caption">Лагеря трудовые</span>
                 </button>
-                <ol class="dropdown__content"></ol>
             </li>
-            <li class="dropdown" id="camp-prisoners" filter="prisoners">
-            <button class="dropdown__toggle">
-                <span class="dropdown__ico">
-                    <img src="./i/ico_camp_prisoners.png" srcset="./i/ico_camp_prisoners_2x.png 2x" alt="Лагеря для военнопленных">
-                </span>
-                <span class="dropdown__caption">Лагеря для военнопленных</span>
-                <div class="dropdown__arrow">
-                    <img src="./i/arrow.png" srcset="./i/arrow_2x.png 2x" alt="Toggle arrow">
-                </div>
-            </button>
-            <ol class="dropdown__content"></ol>
-        </li>
-        <li class="dropdown" id="camp-transit" filter="transit">
-            <button class="dropdown__toggle">
-                <span class="dropdown__ico">
-                    <img src="./i/ico_camp_transit.png" srcset="./i/ico_camp_transit_2x.png 2x" alt="Лагеря транзитные">
-                </span>
-                <span class="dropdown__caption">Лагеря транзитные</span>
-                <div class="dropdown__arrow">
-                    <img src="./i/arrow.png" srcset="./i/arrow_2x.png 2x" alt="Toggle arrow">
-                </div>
-            </button>
-            <ol class="dropdown__content"></ol>
-        </li>
-        <li class="dropdown" id="camp-countries" filter="countries">
-            <button class="dropdown__toggle">
-                <span class="dropdown__ico">
-                    <img src="./i/ico_camp_by_countries.png" srcset="./i/ico_camp_by_countries_2x.png 2x" alt="Лагеря по странам">
-                </span>
-                <span class="dropdown__caption">Лагеря по странам</span>
-                <div class="dropdown__arrow">
-                    <img src="./i/arrow.png" srcset="./i/arrow_2x.png 2x" alt="Toggle arrow">
-                </div>
-            </button>
-            <ol class="dropdown__content"> </ol>
-        </li>
-        <li>
-            <h1>
-                Фильтр по странам доступен для: Германия, Польша, Югославия, Нидерланды<br><br>
-                Фильтры для лагерей: смерти (Баница, Белжец, Аушвиц), трудовой (Аушви, Арбайтсдорф), военнопленных (Амерсфорт), транзитный (Амерсфорт)
-            </h1>
-        </li>
+            <li class="filters__filter">
+                <button class="filters-control" id="camp-prisoners" filter="prisoners">
+                    <span class="filters-control__ico">
+                        <img src="./i/ico_camp_prisoners.png" srcset="./i/ico_camp_prisoners_2x.png 2x" alt="Лагеря для военнопленных">
+                    </span>
+                    <span class="filters-control__caption">Лагеря для военнопленных</span>
+                </button>
+            </li>
+            <li class="filters__filter">
+                <button class="filters-control" id="camp-transit" filter="transit">
+                    <span class="filters-control__ico">
+                        <img src="./i/ico_camp_transit.png" srcset="./i/ico_camp_transit_2x.png 2x" alt="Лагеря транзитные">
+                    </span>
+                    <span class="filters-control__caption">Лагеря транзитные</span>
+                </button>
+            </li>
+            <li class="filters__filter">
+                <button class="filters-control" id="camp-all" filter="all">
+                    <span class="filters-control__ico">
+                        <img src="./i/ico_camp_by_countries.png" srcset="./i/ico_camp_by_countries_2x.png 2x" alt="Все лагеря на карте">
+                    </span>
+                    <span class="filters-control__caption">Все лагеря на карте</span>
+                </button>
+            </li>
+            <li>
+                <h1>
+                    Фильтр по странам доступен для: Германия, Польша, Югославия, Нидерланды<br><br>
+                    Фильтры для лагерей: смерти (Баница, Белжец, Аушвиц), трудовой (Аушви, Арбайтсдорф), военнопленных (Амерсфорт), транзитный (Амерсфорт)
+                </h1>
+            </li>
         </ul>
         <div class="wrapper" id="mapWrapper">
             <svg id="map" class="map" viewBox="0 0 857 480" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
