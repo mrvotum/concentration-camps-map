@@ -1,5 +1,48 @@
-body {
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+.main {
+  font-family: "Inter";
   display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.main--is-locked {
+  overflow: hidden;
+}
+.main__content {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  padding: 28px;
+}
+
+.top-bar {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-self: center;
+  padding-top: 28px;
+  padding-right: 28px;
+  padding-left: 28px;
+}
+.top-bar__filters, .top-bar__title {
+  padding: 16px 12px;
+  background-color: #80756B;
+  border-radius: 3px;
+  border: 1px solid #fff;
+  display: flex;
+  align-items: center;
+  box-shadow: 11px 11px 4px rgba(0, 0, 0, 0.25);
+}
+.top-bar__title {
+  font-weight: 700;
+}
+.top-bar__title, .top-bar__control {
+  font-size: 18px;
+  line-height: 18px;
+  color: #fff;
+}
+.top-bar__filter:not(:first-child) {
+  margin-left: 17px;
 }
 
 .filters {
@@ -101,6 +144,67 @@ body {
 .map__camp {
   transition: opacity 2s ease-in-out;
 }
-.map__camp:not(.map__country--is-active .map__camp) {
-  opacity: 0;
+.map__camp:hover {
+  cursor: pointer;
+}
+
+.modal {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: #ffffff;
+  z-index: 1000;
+}
+.modal::before {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  content: "";
+  background-color: #5c6065;
+  opacity: 0.85;
+}
+.modal__header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 11px;
+}
+.modal__title {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 14px;
+  display: inline-block;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+.modal__close {
+  width: 25px;
+  height: 25px;
+  font-size: 24px;
+  line-height: 24px;
+  flex-shrink: 0;
+}
+.modal__close:not(:hover) {
+  opacity: 0.8;
+}
+.modal__title, .modal__content, .modal__close {
+  position: relative;
+}
+.modal__content {
+  max-height: 298px;
+  overflow-y: auto;
+  padding-right: 10px;
+  margin-right: 10px;
+}
+.modal__content::-webkit-scrollbar {
+  width: 2px;
+  height: 2px;
+  border-radius: 2px;
+  background-color: rgba(255, 255, 255, 0.3019607843);
+}
+.modal__content::-webkit-scrollbar-thumb {
+  border-radius: 2px;
+  background-color: #ffffff;
 }/*# sourceMappingURL=style.css.map */

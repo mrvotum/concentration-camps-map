@@ -66,6 +66,56 @@ const countries = [
 	  },
 ];
 const map = document.getElementById('map');
+const main = document.getElementById('main');
+
+const lockScrollPageToggle = () => {
+	main.classList.toggle('main--is-locked');
+}
+
+const createModalElement = (tag, className, textContent) => {
+	const tagEl = document.createElement(tag);
+	tagEl.className = className;
+
+	if (textContent) tagEl.textContent = textContent;
+
+	return tagEl;
+}
+
+const createModal = (data) => {
+	const modalEl = createModalElement('div', 'modal');
+	const headerEl = createModalElement('div', 'modal__header');
+	const titleEl = createModalElement('h2', 'modal__title', data.name);
+	const closeEl = createModalElement('button', 'modal__close', '×');
+	const contentEl = createModalElement('div', 'modal__content', data.content);
+
+	closeEl.addEventListener('click', () => {
+        lockScrollPageToggle();
+		modalEl.remove();
+    });
+
+	headerEl.appendChild(titleEl);
+	headerEl.appendChild(closeEl);
+	modalEl.appendChild(headerEl);
+	modalEl.appendChild(contentEl);
+
+	main.appendChild(modalEl);
+}
+
+map.addEventListener('click', (event) => {
+	if (event.target.classList.contains('map__camp')) {
+		console.log(`Ищем инфу для лагеря: ${event.target.id}`);
+		// Блокируем скролл для модалки 
+		lockScrollPageToggle();
+
+		jsonData.filter((element) => {
+			if (element.id === event.target.id) {
+				console.log(element);
+				
+				createModal(element);
+			}
+		});
+	}
+})
 
 const createJson = (inputJsonData) => {
 	inputJsonData.forEach((element) => {
