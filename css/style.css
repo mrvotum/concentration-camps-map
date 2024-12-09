@@ -22,7 +22,7 @@ html {
   display: flex;
   width: 100%;
   justify-content: space-between;
-  padding: 1.75rem;
+  padding: calc(28 / 16rem);
 }
 
 .btn {
@@ -30,12 +30,14 @@ html {
   border: 1px solid #ffffff;
   color: #ffffff;
   border-radius: 3px;
-  padding: 0.3125rem 0.9375rem;
+  padding: calc(5 / 16rem) calc(15 / 16rem);
   transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+  filter: drop-shadow(7px 18px 4px rgba(0, 0, 0, 0.25));
 }
 .btn:hover {
   color: #cc5214;
   background-color: #c6c2be;
+  border-color: #c6c2be;
 }
 
 .page-start {
@@ -82,13 +84,13 @@ html {
   opacity: 0.5;
 }
 .page-start__caption {
-  font-size: 1.5625rem;
-  line-height: 1.9375rem;
+  font-size: calc(25 / 16rem);
+  line-height: calc(31 / 16rem);
   text-align: center;
   color: #ffffff;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 2.75rem;
+  margin-bottom: calc(44 / 16rem);
 }
 .page-start__btn {
   display: block;
@@ -96,8 +98,8 @@ html {
   font-weight: 600;
   margin-left: auto;
   margin-right: auto;
-  line-height: 1.875rem;
-  font-size: 1.5625rem;
+  line-height: calc(30 / 16rem);
+  font-size: calc(25 / 16rem);
 }
 
 .page-start-logo {
@@ -107,9 +109,9 @@ html {
   justify-content: center;
   margin-top: auto;
   margin-bottom: auto;
-  margin-bottom: 1.25rem;
-  padding-right: 1.25rem;
-  padding-left: 1.25rem;
+  margin-bottom: calc(20 / 16rem);
+  padding-right: calc(20 / 16rem);
+  padding-left: calc(20 / 16rem);
 }
 .page-start-logo::before {
   position: absolute;
@@ -191,19 +193,7 @@ html {
   width: 100%;
   display: flex;
   align-items: center;
-  background-color: #80756b;
-  color: white;
-  padding-left: 12px;
-  padding-right: 12px;
-  border: none;
-  cursor: pointer;
-  filter: drop-shadow(11px 11px 4px rgba(0, 0, 0, 0.25));
   height: 33px;
-  border-radius: 5px;
-  border: 1px solid #fff;
-}
-.filters-control:hover {
-  background-color: #2980b9;
 }
 .filters-control__ico {
   width: 21px;
