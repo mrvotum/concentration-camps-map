@@ -1,20 +1,148 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Rufina:wght@400;700&display=swap");
+html {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
 .main {
   font-family: "Inter";
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  flex-grow: 1;
 }
 .main--is-locked {
   overflow: hidden;
+}
+.main__wrapper--is-hidden {
+  display: none;
 }
 .main__content {
   display: flex;
   width: 100%;
   justify-content: space-between;
-  padding: 28px;
+  padding: 1.75rem;
 }
 
+.btn {
+  background-color: #80756b;
+  border: 1px solid #ffffff;
+  color: #ffffff;
+  border-radius: 3px;
+  padding: 0.3125rem 0.9375rem;
+  transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}
+.btn:hover {
+  color: #cc5214;
+  background-color: #c6c2be;
+}
+
+.page-start {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  overflow: hidden;
+}
+.page-start--is-hidden {
+  display: none;
+}
+.page-start__content {
+  position: relative;
+  width: 100%;
+}
+.page-start__fog {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+.page-start__fog::before {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 100%;
+  background: url(../i/fog.png) center center/cover;
+  animation: fog_moving 15s linear infinite;
+}
+.page-start__bg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.page-start__bg--wire {
+  opacity: 0.5;
+}
+.page-start__caption {
+  font-size: 1.5625rem;
+  line-height: 1.9375rem;
+  text-align: center;
+  color: #ffffff;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 2.75rem;
+}
+.page-start__btn {
+  display: block;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.875rem;
+  font-size: 1.5625rem;
+}
+
+.page-start-logo {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-bottom: 1.25rem;
+  padding-right: 1.25rem;
+  padding-left: 1.25rem;
+}
+.page-start-logo::before {
+  position: absolute;
+  content: "";
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background-image: url(../i/logo_barbed_wire_2x.png);
+  height: 100%;
+  background-position: left;
+  background-size: contain;
+}
+
+@keyframes fog_moving {
+  0% {
+    left: 0;
+    opacity: 0.1;
+  }
+  15% {
+    opacity: 0.6;
+  }
+  95% {
+    opacity: 0.4;
+  }
+  99% {
+    opacity: 0.1;
+  }
+  100% {
+    left: -100%;
+    opacity: 0;
+  }
+}
 .top-bar {
   display: flex;
   width: 100%;
@@ -26,7 +154,7 @@
 }
 .top-bar__filters, .top-bar__title {
   padding: 16px 12px;
-  background-color: #80756B;
+  background-color: #80756b;
   border-radius: 3px;
   border: 1px solid #fff;
   display: flex;
@@ -48,7 +176,7 @@
 .filters {
   display: flex;
   flex-direction: column;
-  width: 318px;
+  width: 290px;
 }
 .filters__filter {
   width: 100%;
@@ -85,6 +213,7 @@
 .filters-control__caption {
   font-size: 18px;
   line-height: 14px;
+  white-space: nowrap;
 }
 
 .wrapper {

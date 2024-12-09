@@ -68,6 +68,12 @@ const countries = [
 const map = document.getElementById('map');
 const main = document.getElementById('main');
 
+document.getElementById('close-start-page').addEventListener('click', () => {
+	console.log(document.getElementById('main-content'));
+	document.getElementById('start-page').classList.add('page-start--is-hidden');
+	document.getElementById('main-content').classList.remove('main__wrapper--is-hidden');
+});
+
 const lockScrollPageToggle = () => {
 	main.classList.toggle('main--is-locked');
 }
@@ -81,19 +87,41 @@ const createModalElement = (tag, className, textContent) => {
 	return tagEl;
 }
 
+let playStatus = false;
+const audio = new Audio();
+
 const createModal = (data) => {
 	const modalEl = createModalElement('div', 'modal');
 	const headerEl = createModalElement('div', 'modal__header');
 	const titleEl = createModalElement('h2', 'modal__title', data.name);
+	const playEl = createModalElement('button', 'modal__close', 'play');
 	const closeEl = createModalElement('button', 'modal__close', '×');
 	const contentEl = createModalElement('div', 'modal__content', data.content);
 
 	closeEl.addEventListener('click', () => {
         lockScrollPageToggle();
+		audio.pause();
+		playStatus = false;
 		modalEl.remove();
     });
 
+	playEl.addEventListener('click', () => {
+		if(!playStatus) {
+			console.log('play');
+			audio.src = `./sound/${data.audio}.mp3`;
+			audio.play();
+			playStatus = true;
+			playEl.textContent = "Stop";
+		} else {
+			audio.pause();
+			playStatus = false;
+
+			playEl.textContent = "Play";
+		}
+    });
+
 	headerEl.appendChild(titleEl);
+	headerEl.appendChild(playEl);
 	headerEl.appendChild(closeEl);
 	modalEl.appendChild(headerEl);
 	modalEl.appendChild(contentEl);
