@@ -22,7 +22,7 @@ html {
   display: flex;
   width: 100%;
   justify-content: space-between;
-  padding: calc(28 / 16rem);
+  padding: calc(28 / 16 * 1rem);
 }
 
 .btn {
@@ -30,7 +30,7 @@ html {
   border: 1px solid #ffffff;
   color: #ffffff;
   border-radius: 3px;
-  padding: calc(5 / 16rem) calc(15 / 16rem);
+  padding: calc(5 / 16 * 1rem) calc(15 / 16 * 1rem);
   transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
   filter: drop-shadow(7px 18px 4px rgba(0, 0, 0, 0.25));
 }
@@ -84,13 +84,13 @@ html {
   opacity: 0.5;
 }
 .page-start__caption {
-  font-size: calc(25 / 16rem);
-  line-height: calc(31 / 16rem);
+  font-size: calc(25 / 16 * 1rem);
+  line-height: calc(31 / 16 * 1rem);
   text-align: center;
   color: #ffffff;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: calc(44 / 16rem);
+  margin-bottom: calc(44 / 16 * 1rem);
 }
 .page-start__btn {
   display: block;
@@ -98,8 +98,8 @@ html {
   font-weight: 600;
   margin-left: auto;
   margin-right: auto;
-  line-height: calc(30 / 16rem);
-  font-size: calc(25 / 16rem);
+  line-height: calc(30 / 16 * 1rem);
+  font-size: calc(25 / 16 * 1rem);
 }
 
 .page-start-logo {
@@ -109,9 +109,9 @@ html {
   justify-content: center;
   margin-top: auto;
   margin-bottom: auto;
-  margin-bottom: calc(20 / 16rem);
-  padding-right: calc(20 / 16rem);
-  padding-left: calc(20 / 16rem);
+  margin-bottom: calc(20 / 16 * 1rem);
+  padding-right: calc(20 / 16 * 1rem);
+  padding-left: calc(20 / 16 * 1rem);
 }
 .page-start-logo::before {
   position: absolute;
