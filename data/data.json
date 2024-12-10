@@ -1142,25 +1142,5 @@
     "additionalPurpose": "",
     "audio": "test-sound",
     "massPeopleDestruction": false
-  }, {
-    "id": "Oranienburg",
-    "name": "Ораниенбург",
-    "purpose": {
-      "concentration": true
-    },
-    "country": {
-      "caption": "Германия",
-      "id": "DE"
-    },
-    "content": "",
-    "deathToll": 0,
-    "area": 0,
-    "yearOfFoundation": 0,
-    "yearOfLiquidation": 0,
-    "createdBy": "",
-    "additionalInformation": "",
-    "additionalPurpose": "",
-    "audio": "test-sound",
-    "massPeopleDestruction": false
   }
 ]
