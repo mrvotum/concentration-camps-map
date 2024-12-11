@@ -69,6 +69,29 @@ const map = document.getElementById('map');
 const mapWrapper = document.getElementById('mapWrapper');
 const main = document.getElementById('main');
 
+let openedModal = null;
+
+let playStatus = false;
+const audio = new Audio();
+const topBarFilters = document.querySelectorAll('[top-bar-filter]');
+
+
+const allFiltersButtons = document.querySelectorAll('[data-filter]');
+const allSvgCamps = Array.from(map.querySelectorAll('.map__camp'));
+const allSvgCountries = Array.from(map.querySelectorAll('[country]'));
+
+const createJson = (inputJsonData) => {
+	inputJsonData.forEach((element) => {
+		jsonData.push(element);
+	});
+};
+
+const data = fetch("./data/data.json")
+	.then((response) => response.json())
+	.then((data) => createJson(data))
+	.then(() => createTooltipsData());
+
+
 document.getElementById('close-start-page').addEventListener('click', () => {
 	document.getElementById('start-page').classList.add('page-start--is-hidden');
 	document.getElementById('main-content').classList.remove('main__wrapper--is-hidden');
@@ -82,6 +105,14 @@ const lockScrollPageToggle = () => {
 	main.classList.toggle('main--is-locked');
 }
 
+const removeModal = (modal) => {
+	modal.remove();
+
+	openedModal = null;
+
+	lockScrollPageToggle();
+};
+
 const createModalElement = (tag, className, textContent) => {
 	const tagEl = document.createElement(tag);
 	tagEl.className = className;
@@ -94,15 +125,12 @@ const createModalElement = (tag, className, textContent) => {
 	return tagEl;
 }
 
-let playStatus = false;
-const audio = new Audio();
-
 const createCampModal = (data) => {
 	const modalEl = createModalElement('div', 'modal');
 	const headerEl = createModalElement('div', 'modal__header');
 	const titleEl = createModalElement('h2', 'modal__title', data.name);
 	const playEl = createModalElement('button', 'modal__close', 'play');
-	const closeEl = createModalElement('button', 'modal__close', '×');
+	const closeEl = createModalElement('button', 'modal__close');
 	const contentEl = createModalElement('div', 'modal__content', data.content);
 
 	closeEl.addEventListener('click', () => {
@@ -136,19 +164,18 @@ const createCampModal = (data) => {
 	main.appendChild(modalEl);
 }
 
+
 createModal = (title, content) => {
 	const modalEl = createModalElement('div', 'modal');
 	const headerEl = createModalElement('div', 'modal__header');
 	const titleEl = createModalElement('h2', 'modal__title', title);
-	const closeEl = createModalElement('button', 'modal__close', '×');
+	const closeEl = createModalElement('button', 'modal__close');
 	const contentEl = createModalElement('div', 'modal__content', content);
 
-	console.log(content);
-	console.log(contentEl);
+	openedModal = modalEl;
 
 	closeEl.addEventListener('click', () => {
-        lockScrollPageToggle();
-		modalEl.remove();
+		removeModal(modalEl);
     });
 
 	headerEl.appendChild(titleEl);
@@ -159,21 +186,24 @@ createModal = (title, content) => {
 	main.appendChild(modalEl);
 }
 
-const topBarFilters = document.querySelectorAll('[top-bar-filter]');
 topBarFilters.forEach((button) => {
 	button.addEventListener('click', () => {
 		lockScrollPageToggle();
 
 		switch (button.getAttribute('top-bar-filter')) {
 			case 'countries':
-				console.log('countries open');
-
-				const countriesContent = countries.map((country) => {return country.caption});
-
 				const listEl = createModalElement('ol', 'modal__list');
 				
-				countriesContent.forEach((country) => {
-                    const itemEl = createModalElement('li', 'modal__item', country);
+				countries.forEach((country) => {
+                    const itemEl = createModalElement('li', 'modal__item');
+                    const buttonEl = createModalElement('button', 'modal__button', country.caption);
+					buttonEl.addEventListener('click', () => {
+						hideAllCamps();
+						removeModal(openedModal);
+						showCampsInCountry(country.id);
+					});
+					itemEl.appendChild(buttonEl);
+
                     listEl.appendChild(itemEl);
                 });
 
@@ -181,16 +211,17 @@ topBarFilters.forEach((button) => {
 
 				break;
 			case 'alphabet':
-				console.log('alphabet open');
-
-				const alphabetContent = jsonData.map((camp) => {return camp.name});
-
-				console.log(alphabetContent);
-
 				const contentEl = createModalElement('ol', 'modal__list');
 				
-				alphabetContent.forEach((camp) => {
-                    const itemEl = createModalElement('li', 'modal__item', camp);
+				jsonData.forEach((camp) => {
+                    const itemEl = createModalElement('li', 'modal__item');
+                    const buttonEl = createModalElement('button', 'modal__button', camp.name);
+					buttonEl.addEventListener('click', () => {
+						hideAllCamps();
+						removeModal(openedModal);
+						showCampByFilter(camp.id);
+					});
+					itemEl.appendChild(buttonEl);
                     contentEl.appendChild(itemEl);
                 });
 
@@ -225,33 +256,28 @@ map.addEventListener('click', (event) => {
 	}
 })
 
-const createJson = (inputJsonData) => {
-	inputJsonData.forEach((element) => {
-		jsonData.push(element);
-	});
-};
-
-const data = fetch("./data/data.json")
-	.then((response) => response.json())
-	.then((data) => createJson(data))
-	.then(() => createTooltipsData());
-
 // filters
 const showCampsInCountry = (id) => {
 	const country = map.getElementById(id);
 
-	if (!country) {console.error("Country not found"); return}
+	if (!country) {console.error(`Country "${id}" not found`); return}
 
 	country.classList.add('map__country--is-active');
 };
 
 const hideAllCamps = (isReverse) => {
+	allSvgCountries.map((country) => {
+		if (country.classList.contains('map__country--is-active')) {
+			country.classList.remove('map__country--is-active');
+		};
+	});
+
 	if (isReverse) {
-		allCamps.forEach((camp) => {
+		allSvgCamps.forEach((camp) => {
 			camp.classList.remove('map__camp--is-hidden');
 		});
 	} else {
-		allCamps.forEach((camp) => {
+		allSvgCamps.forEach((camp) => {
 			camp.classList.add('map__camp--is-hidden');
 		});
 	};
@@ -276,15 +302,12 @@ const showCampsByFilter = (filter) => {
 };
 
 const showCampByFilter = (id) => {
-	allCamps.filter((camp) => {
+	allSvgCamps.filter((camp) => {
 		if (camp.id === id) {
 			camp.classList.remove('map__camp--is-hidden');
 		}
 	});
 };
-
-const allFiltersButtons = document.querySelectorAll('[data-filter]');
-const allCamps = Array.from(map.querySelectorAll('.map__camp'));
 
 allFiltersButtons.forEach((el) => {
 	el.addEventListener("click", () => {
@@ -303,7 +326,7 @@ allFiltersButtons.forEach((el) => {
 let tooltipElem;
 
 const createTooltipsData = () => {
-	allCamps.forEach((el) => {
+	allSvgCamps.forEach((el) => {
 		let camp = jsonData.find((camp) => {return camp.id === el.getAttribute('id')});
 	
 		el.setAttribute('data-tooltip', camp.name);
@@ -311,7 +334,7 @@ const createTooltipsData = () => {
 }
 
 
-allCamps.forEach((el) => {
+allSvgCamps.forEach((el) => {
 	el.addEventListener("mouseover", (event) => {
 		let tooltipHtml = el.dataset.tooltip;
 		if (!tooltipHtml) return;
@@ -333,6 +356,8 @@ allCamps.forEach((el) => {
 		}
 	});
 });
+
+
 
 
 
