@@ -1,69 +1,48 @@
 const jsonData = [];
 const countries = [
 	{
-		id: "LV",
-		caption: "СССР (совр. Латвия)",
-	  },
-	  {
-		id: "LT",
-		caption: "СССР (совр. Литва)",
-	  },
-	  {
-		id: "RU",
-		caption: "СССР (совр. Россия)",
-	  },
-	  {
-		id: "BY",
-		caption: "Беларусь",
-	  },
-	  {
 		id: "GB",
 		caption: "Великобритания",
-	  },
-	  {
+	}, {
 		id: "DE",
 		caption: "Германия",
-	  },
-	  {
+	}, {
 		id: "IT",
 		caption: "Италия",
-	  },
-	  {
+	}, {
+		id: "LV",
+		caption: "Латвия",
+	}, {
+		id: "LT",
+		caption: "Литва",
+	}, {
 		id: "NL",
 		caption: "Нидерланды",
-	  },
-	  {
+	}, {
 		id: "NO",
 		caption: "Норвегия",
-	  },
-	  {
+	}, {
 		id: "PL",
 		caption: "Польша",
-	  },
-	  {
-		id: "UA",
-		caption: "Украина",
-	  },
-	  {
+	}, {
+		id: "USSR",
+		caption: "СССР",
+	}, {
 		id: "FI",
 		caption: "Финляндия",
-	  },
-	  {
+	}, {
 		id: "FR",
 		caption: "Франция",
-	  },
-	  {
+	}, {
 		id: "CZ",
 		caption: "Чехия",
-	  },
-	  {
-		id: "UG",
-		caption: "Югославия (совр. Сербия)",
-	  },
-	  {
+	}, {
 		id: "EE",
 		caption: "Эстония",
-	  },
+	}, {
+		id: "UG",
+		caption: "Югославия",
+	},
 ];
 const map = document.getElementById('map');
 const mapWrapper = document.getElementById('mapWrapper');
@@ -100,7 +79,6 @@ document.getElementById('close-start-page').addEventListener('click', () => {
 	document.getElementById('start-page').classList.add('page-start--is-hidden');
 	document.getElementById('main-content').classList.remove('main__wrapper--is-hidden');
 });
-
 
 const lockScrollPageToggle = () => {
 	main.classList.toggle('main--is-locked');
@@ -165,7 +143,7 @@ const createCampModal = (data) => {
 	titleWrapperEl.appendChild(countryEl);
 
 	for (key in data.purpose) {
-		const imgEl = createModalElement('img', 'modal-title__img', false, [{src: `./i/ico_camp_${key}_2x.png`}, {alt: key}]);
+	const imgEl = createModalElement('img', 'modal-title__img', false, [{src: `./i/ico_camp_${key}_2x.png`}, {alt: key}]);
 		titleWrapperEl.appendChild(imgEl);
 	};
 
