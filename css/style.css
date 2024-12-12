@@ -1,5 +1,4 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Rufina:wght@400;700&display=swap");
 html {
   display: flex;
   flex-direction: column;
@@ -283,7 +282,7 @@ html {
   fill: #9f8e7e;
 }
 .map__camp {
-  transition: opacity 0.4s ease-in-out;
+  transition: opacity 0.2s ease-in-out;
 }
 .map__camp--is-hidden:not(.map__country--is-active .map__camp) {
   pointer-events: none;
@@ -300,10 +299,35 @@ html {
   transform: translate(-50%, -50%);
   border-radius: 3px;
   z-index: 1000;
-  max-width: 913px;
-  max-height: 433px;
   border: 1px solid #ffffff;
-  padding-bottom: calc(15 / 16 * 1rem);
+  padding-top: calc(15 / 16 * 1rem);
+  padding-bottom: calc(20 / 16 * 1rem);
+  width: calc(100vw - calc(400 / 16 * 1rem));
+  height: calc(100vh - calc(52 / 16 * 1rem));
+}
+.modal--has-fixed-size {
+  width: calc(693 / 16 * 1rem);
+  height: calc(318 / 16 * 1rem);
+}
+.modal--is-concentration, .modal--is-prisoners, .modal--is-transit, .modal--is-labor, .modal--is-death {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: calc(300 / 16 * 1rem) calc(300 / 16 * 1rem);
+}
+.modal--is-concentration {
+  background-image: url(../i/ico_camp_concentration_bg.png);
+}
+.modal--is-prisoners {
+  background-image: url(../i/ico_camp_prisoners_bg.png);
+}
+.modal--is-transit {
+  background-image: url(../i/ico_camp_transit_bg.png);
+}
+.modal--is-labor {
+  background-image: url(../i/ico_camp_labor_bg.png);
+}
+.modal--is-death {
+  background-image: url(../i/ico_camp_death_bg.png);
 }
 .modal::before {
   position: absolute;
@@ -315,6 +339,7 @@ html {
   background-color: #88837e;
   opacity: 0.9;
   border-radius: inherit;
+  z-index: -1;
 }
 .modal::after {
   position: fixed;
@@ -332,25 +357,18 @@ html {
   justify-content: space-between;
   color: #fff;
   margin-bottom: calc(25 / 16 * 1rem);
-}
-.modal__title {
-  font-weight: 600;
-  font-size: calc(25 / 16 * 1rem);
-  line-height: calc(25 / 16 * 1rem);
-  display: inline-block;
-  margin-top: auto;
-  margin-bottom: auto;
-  padding-top: calc(15 / 16 * 1rem);
+  padding-right: calc(20 / 16 * 1rem);
   padding-left: calc(35 / 16 * 1rem);
 }
 .modal__close {
+  position: relative;
   width: calc(21 / 16 * 1rem);
   height: calc(21 / 16 * 1rem);
   font-size: calc(21 / 16 * 1rem);
   line-height: calc(21 / 16 * 1rem);
   flex-shrink: 0;
-  margin-right: calc(3 / 16 * 1rem);
-  margin-top: calc(3 / 16 * 1rem);
+  margin-top: calc(12 / 16 * 1rem);
+  margin-left: calc(15 / 16 * 1rem);
 }
 .modal__close::before, .modal__close::after {
   position: absolute;
@@ -359,6 +377,7 @@ html {
   left: 50%;
   transform: translate(-50%, -50%) rotate(45deg);
   border-radius: 2px;
+  opacity: 0.8;
   background-color: currentColor;
 }
 .modal__close::before {
@@ -370,18 +389,45 @@ html {
   height: calc(2 / 16 * 1rem);
 }
 .modal__close:not(:hover) {
-  opacity: 0.8;
+  opacity: 0.6;
 }
-.modal__title, .modal__content, .modal__close {
+.modal__audio {
   position: relative;
+  width: calc(20 / 16 * 1rem);
+  height: calc(20 / 16 * 1rem);
+  background-size: contain;
+  transition: filter 0.2s ease-in-out;
+  margin-left: auto;
+  margin-top: calc(12 / 16 * 1rem);
+}
+.modal__audio:hover {
+  filter: invert(1);
+}
+.modal__audio:not(.modal__audio--is-active) {
+  background-image: url(../i/audio-on.png);
+}
+.modal__audio--is-active {
+  background-image: url(../i/audio-off.png);
+}
+.modal__wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-right: calc(36 / 16 * 1rem);
 }
 .modal__content {
-  max-height: 322px;
-  overflow-y: auto;
+  display: flex;
   text-align: center;
   padding-left: calc(35 / 16 * 1rem);
   padding-right: calc(25 / 16 * 1rem);
   margin-right: calc(30 / 16 * 1rem);
+  overflow: hidden auto;
+}
+.modal__content:not(.modal--has-fixed-size .modal__content) {
+  max-height: calc(100% - calc(75 / 16 * 1rem));
+}
+.modal--has-fixed-size .modal__content {
+  max-height: calc(223 / 16 * 1rem);
+  flex-direction: column;
 }
 .modal__content::-webkit-scrollbar {
   width: 2px;
@@ -395,14 +441,33 @@ html {
 }
 .modal__content p {
   display: inline-block;
+  font-size: calc(18 / 16 * 1rem);
+  line-height: calc(23 / 16 * 1rem);
 }
 .modal__content p:not(:first-child) {
   margin-top: calc(20 / 16 * 1rem);
 }
+.modal__img {
+  max-width: 310px;
+  -o-object-fit: contain;
+     object-fit: contain;
+  position: sticky;
+  top: 0;
+  margin-bottom: auto;
+  font-size: calc(12 / 16 * 1rem);
+  line-height: calc(14 / 16 * 1rem);
+  color: #c1c1c1;
+}
 .modal__list {
+  width: 100%;
   -moz-column-count: 2;
        column-count: 2;
   margin-left: calc(36 / 16 * 1rem);
+}
+.modal--has-fixed-columns .modal__list {
+  -moz-column-fill: auto;
+       column-fill: auto;
+  height: calc(calc(20 / 16 * 1rem) * 11);
 }
 .modal__item {
   text-align: start;
@@ -415,13 +480,35 @@ html {
   color: #cc5214;
 }
 
+.modal-title {
+  display: flex;
+  flex-direction: column;
+}
+.modal-title__caption {
+  font-weight: 600;
+  font-size: calc(25 / 16 * 1rem);
+  line-height: calc(25 / 16 * 1rem);
+  display: inline-block;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+.modal-title__img {
+  width: calc(22 / 16 * 1rem);
+  height: calc(22 / 16 * 1rem);
+  margin-left: calc(5 / 16 * 1rem);
+}
+.modal-title__wrapper {
+  display: flex;
+  align-items: flex-end;
+}
+
 .tooltip {
   position: absolute;
   padding-left: calc(8 / 16 * 1rem);
   padding-right: calc(8 / 16 * 1rem);
   background-color: #D9D9D9;
   box-shadow: 0px 1px 4px #FFFFFF;
-  z-index: 2000;
+  z-index: 1000;
   font-size: 18px;
   line-height: 18px;
 }/*# sourceMappingURL=style.css.map */

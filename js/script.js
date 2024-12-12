@@ -71,10 +71,14 @@ const main = document.getElementById('main');
 
 let openedModal = null;
 
-let playStatus = false;
 const audio = new Audio();
+let activeSound = null;
+
 const topBarFilters = document.querySelectorAll('[top-bar-filter]');
 
+audio.addEventListener('ended', () => {
+	if (activeSound) activeSound.classList.remove('modal__audio--is-active');
+});
 
 const allFiltersButtons = document.querySelectorAll('[data-filter]');
 const allSvgCamps = Array.from(map.querySelectorAll('.map__camp'));
@@ -97,9 +101,6 @@ document.getElementById('close-start-page').addEventListener('click', () => {
 	document.getElementById('main-content').classList.remove('main__wrapper--is-hidden');
 });
 
-// Для отладки!!!!!
-// document.getElementById('start-page').classList.add('page-start--is-hidden');
-// document.getElementById('main-content').classList.remove('main__wrapper--is-hidden');
 
 const lockScrollPageToggle = () => {
 	main.classList.toggle('main--is-locked');
@@ -113,7 +114,11 @@ const removeModal = (modal) => {
 	lockScrollPageToggle();
 };
 
-const createModalElement = (tag, className, textContent) => {
+const packingElements = (parentElement, childrenElements) => {
+	childrenElements.forEach((child) => parentElement.appendChild(child));
+}
+
+const createModalElement = (tag, className, textContent, attributes) => {
 	const tagEl = document.createElement(tag);
 	tagEl.className = className;
 
@@ -122,55 +127,84 @@ const createModalElement = (tag, className, textContent) => {
 		else tagEl.innerHTML = textContent;
 	}
 
+	if (attributes) {
+		attributes.forEach((attribute) => {
+			for (key in attribute) {
+				tagEl.setAttribute(key, attribute[key]);
+			}
+		});
+	}
+
 	return tagEl;
 }
 
+const audioToggler = (audioSrc, playButton) => {
+	if (activeSound) {
+		audio.pause();
+		activeSound = null;
+	} else {
+		audio.src = `./sound/${audioSrc}.mp3`;
+		audio.play();
+		activeSound = playButton;
+	}
+
+	if (playButton)	playButton.classList.toggle("modal__audio--is-active");
+}
+
 const createCampModal = (data) => {
-	const modalEl = createModalElement('div', 'modal');
+	const modalClassModifier = Object.keys(data.purpose)[0];
+
+	const modalEl = createModalElement('div', `modal modal--is-${modalClassModifier}`);
 	const headerEl = createModalElement('div', 'modal__header');
-	const titleEl = createModalElement('h2', 'modal__title', data.name);
-	const playEl = createModalElement('button', 'modal__close', 'play');
+	const titleBlockEl = createModalElement('div', 'modal-title');
+	const titleEl = createModalElement('h2', 'modal-title__caption', `«${data.name}»`);
+	const titleWrapperEl = createModalElement('div', 'modal-title__wrapper');
+	const countryEl = createModalElement('h3', 'modal-title__caption', data.country.caption);
+
+	titleBlockEl.appendChild(titleEl);
+	titleWrapperEl.appendChild(countryEl);
+
+	for (key in data.purpose) {
+		const imgEl = createModalElement('img', 'modal-title__img', false, [{src: `./i/ico_camp_${key}_2x.png`}, {alt: key}]);
+		titleWrapperEl.appendChild(imgEl);
+	};
+
+	titleBlockEl.appendChild(titleWrapperEl);	
+
+	const playEl = createModalElement('button', 'modal__audio');
 	const closeEl = createModalElement('button', 'modal__close');
-	const contentEl = createModalElement('div', 'modal__content', data.content);
+	const imgEl = createModalElement('img', 'modal__img', false, [{src: `./i/camp_${data.id.toLowerCase()}.png`, alt: `Фото лагеря «${data.name}»`}]);
+	const textWrapperEl = createModalElement('div', 'modal__wrapper', data.content);
+	const contentEl = createModalElement('div', 'modal__content');
+
+	packingElements(contentEl, [textWrapperEl, imgEl]);
 
 	closeEl.addEventListener('click', () => {
         lockScrollPageToggle();
-		audio.pause();
-		playStatus = false;
+		audioToggler();
 		modalEl.remove();
     });
 
 	playEl.addEventListener('click', () => {
-		if(!playStatus) {
-			console.log('play');
-			audio.src = `./sound/${data.audio}.mp3`;
-			audio.play();
-			playStatus = true;
-			playEl.textContent = "Stop";
-		} else {
-			audio.pause();
-			playStatus = false;
-
-			playEl.textContent = "Play";
-		}
+		audioToggler(data.audio, playEl);
     });
 
-	headerEl.appendChild(titleEl);
-	headerEl.appendChild(playEl);
-	headerEl.appendChild(closeEl);
-	modalEl.appendChild(headerEl);
-	modalEl.appendChild(contentEl);
+	packingElements(headerEl, [titleBlockEl, playEl, closeEl]);
+	packingElements(modalEl, [headerEl, contentEl]);
 
 	main.appendChild(modalEl);
 }
 
-
-createModal = (title, content) => {
+const createModal = (title, content, classModifier) => {
 	const modalEl = createModalElement('div', 'modal');
 	const headerEl = createModalElement('div', 'modal__header');
-	const titleEl = createModalElement('h2', 'modal__title', title);
+	const titleEl = createModalElement('h2', 'modal-title__caption', title);
 	const closeEl = createModalElement('button', 'modal__close');
 	const contentEl = createModalElement('div', 'modal__content', content);
+
+	if (classModifier) {
+		typeof classModifier === 'string' ? modalEl.classList.add(`modal--${classModifier}`) : classModifier.forEach((className) => modalEl.classList.add(`modal--${className}`));
+	}
 
 	openedModal = modalEl;
 
@@ -178,12 +212,28 @@ createModal = (title, content) => {
 		removeModal(modalEl);
     });
 
-	headerEl.appendChild(titleEl);
-	headerEl.appendChild(closeEl);
-	modalEl.appendChild(headerEl);
-	modalEl.appendChild(contentEl);
+	packingElements(headerEl, [titleEl, closeEl]);
+	packingElements(modalEl, [headerEl, contentEl]);
 
 	main.appendChild(modalEl);
+}
+
+const createContentForModal = (contentArr, buttonCaptionKey, isShowCampByCountry) => {
+	const modalContent = createModalElement('ol', 'modal__list');
+
+	contentArr.forEach((contentElement) => {
+		const itemEl = createModalElement('li', 'modal__item');
+		const buttonEl = createModalElement('button', 'modal__button', contentElement[buttonCaptionKey]);
+		buttonEl.addEventListener('click', () => {
+			hideAllCamps();
+			removeModal(openedModal);
+			isShowCampByCountry ? showCampsInCountry(contentElement.id) : showCampByFilter(contentElement.id);;
+		});
+		itemEl.appendChild(buttonEl);
+		modalContent.appendChild(itemEl);
+	});
+
+	return modalContent;
 }
 
 topBarFilters.forEach((button) => {
@@ -192,46 +242,16 @@ topBarFilters.forEach((button) => {
 
 		switch (button.getAttribute('top-bar-filter')) {
 			case 'countries':
-				const listEl = createModalElement('ol', 'modal__list');
-				
-				countries.forEach((country) => {
-                    const itemEl = createModalElement('li', 'modal__item');
-                    const buttonEl = createModalElement('button', 'modal__button', country.caption);
-					buttonEl.addEventListener('click', () => {
-						hideAllCamps();
-						removeModal(openedModal);
-						showCampsInCountry(country.id);
-					});
-					itemEl.appendChild(buttonEl);
-
-                    listEl.appendChild(itemEl);
-                });
-
-				createModal('По странам', listEl);
-
+				const countriesContent = createContentForModal(countries, 'caption', true);
+				createModal('По странам', countriesContent, ['has-fixed-size', 'has-fixed-columns']);
 				break;
 			case 'alphabet':
-				const contentEl = createModalElement('ol', 'modal__list');
-				
-				jsonData.forEach((camp) => {
-                    const itemEl = createModalElement('li', 'modal__item');
-                    const buttonEl = createModalElement('button', 'modal__button', camp.name);
-					buttonEl.addEventListener('click', () => {
-						hideAllCamps();
-						removeModal(openedModal);
-						showCampByFilter(camp.id);
-					});
-					itemEl.appendChild(buttonEl);
-                    contentEl.appendChild(itemEl);
-                });
-
-				createModal('По алфавиту', contentEl);
-
+				const alphabetContent = createContentForModal(jsonData, 'name');
+				createModal('По алфавиту', alphabetContent, 'has-fixed-size');
 				break;
 			case 'about':
-				console.log('about open');
-				const content = `<div style="max-width:41rem;margin-left:7rem;margin-right:3rem;margin-bottom:2rem;"><p>По&nbsp;некоторым данным не&nbsp;менее 18&nbsp;миллионов человек прошли через концентрационные лагеря нацистской германии с&nbsp;1936 по&nbsp;1945&nbsp;г.&nbsp;г. Из&nbsp;них могло быть уничтожено не&nbsp;менее 11&nbsp;миллионов.</p><p>Нацисты использовали лагеря для бесчеловечных медицинских опытов, для рабского труда и&nbsp;издевательств. Помимо этого они просто уничтожали узников в&nbsp;газовых камерах.</p><p>В&nbsp;нашем спецпроекте мы&nbsp;собрали информацию обо всех этих лагерях, где они находились, какие ужасы в&nbsp;них творились, а&nbsp;также о&nbsp;том, кто и&nbsp;когда освободил выживших узников концлагерей.</p><p>Наш проект мы&nbsp;посвящаем памяти всех погибших!<br>Чтобы никто и&nbsp;никогда не&nbsp;забыл о&nbsp;чудовищных преступлениях нацистов!</p><div>`
-				createModal('О проекте', content);
+				const aboutContent = `<div style="margin-left:7rem;margin-right:3rem;"><p>По&nbsp;некоторым данным не&nbsp;менее 18&nbsp;миллионов человек прошли через концентрационные лагеря нацистской германии с&nbsp;1936 по&nbsp;1945&nbsp;г.&nbsp;г.<br>Из&nbsp;них могло быть уничтожено не&nbsp;менее 11&nbsp;миллионов.</p><p>Нацисты использовали лагеря для бесчеловечных медицинских опытов, для рабского труда и&nbsp;издевательств. Помимо этого они просто уничтожали узников в&nbsp;газовых камерах.</p><p>В&nbsp;нашем спецпроекте мы&nbsp;собрали информацию обо всех этих лагерях, где они находились, какие ужасы в&nbsp;них творились, а&nbsp;также о&nbsp;том, кто и&nbsp;когда освободил выживших узников концлагерей.</p><p>Наш проект мы&nbsp;посвящаем памяти всех погибших!<br>Чтобы никто и&nbsp;никогда не&nbsp;забыл о&nbsp;чудовищных преступлениях нацистов!</p><div>`
+				createModal('О проекте', aboutContent);
 				break;
 			default:
 				break;
@@ -239,17 +259,12 @@ topBarFilters.forEach((button) => {
     });
 });
 
-
 map.addEventListener('click', (event) => {
 	if (event.target.classList.contains('map__camp') && !main.classList.contains('main--is-locked')) {
-		console.log(`Ищем инфу для лагеря: ${event.target.id}`);
-		// Блокируем скролл для модалки 
 		lockScrollPageToggle();
 
 		jsonData.filter((element) => {
 			if (element.id === event.target.id) {
-				console.log(element);
-				
 				createCampModal(element);
 			}
 		});
@@ -284,8 +299,6 @@ const hideAllCamps = (isReverse) => {
 }
 
 const showCampsByFilter = (filter) => {
-	console.log(`Активный фильтр: "${filter}"`);
-
 	if (filter !== 'all') {
 		hideAllCamps();
 	} else {
@@ -293,7 +306,6 @@ const showCampsByFilter = (filter) => {
 		return;
 	};
 
-	console.log('Показываем по фильтру');
 	jsonData.filter((camp) => {
 		if (camp.purpose[filter]) {
 			showCampByFilter(camp.id);
@@ -316,12 +328,6 @@ allFiltersButtons.forEach((el) => {
 });
 // filters
 
-
-
-
-
-
-
 // tooltips
 let tooltipElem;
 
@@ -332,7 +338,6 @@ const createTooltipsData = () => {
 		el.setAttribute('data-tooltip', camp.name);
 	});
 }
-
 
 allSvgCamps.forEach((el) => {
 	el.addEventListener("mouseover", (event) => {
@@ -356,11 +361,3 @@ allSvgCamps.forEach((el) => {
 		}
 	});
 });
-
-
-
-
-
-
-
-
