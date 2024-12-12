@@ -80,6 +80,10 @@ document.getElementById('close-start-page').addEventListener('click', () => {
 	document.getElementById('main-content').classList.remove('main__wrapper--is-hidden');
 });
 
+// Для отладки!!!!!
+document.getElementById('start-page').classList.add('page-start--is-hidden');
+document.getElementById('main-content').classList.remove('main__wrapper--is-hidden');
+
 const lockScrollPageToggle = () => {
 	main.classList.toggle('main--is-locked');
 }
@@ -152,7 +156,17 @@ const createCampModal = (data) => {
 	const playEl = createModalElement('button', 'modal__audio');
 	const closeEl = createModalElement('button', 'modal__close');
 	const imgEl = createModalElement('img', 'modal__img', false, [{src: `./i/camp_${data.id.toLowerCase()}.png`, alt: `Фото лагеря «${data.name}»`}]);
-	const textWrapperEl = createModalElement('div', 'modal__wrapper', data.content);
+
+	const textWrapperEl = createModalElement('div', 'modal__wrapper');
+
+	data.content.split('<br>').forEach((paragraph, index) => {
+		let paragraphFormatted = createModalElement('p', 'moving-up', paragraph);
+
+		paragraphFormatted.style.animationDelay = `${index * 0.2}s`;
+
+		textWrapperEl.appendChild(paragraphFormatted);
+	});
+
 	const contentEl = createModalElement('div', 'modal__content');
 
 	packingElements(contentEl, [textWrapperEl, imgEl]);

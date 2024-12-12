@@ -511,4 +511,23 @@ html {
   z-index: 1000;
   font-size: 18px;
   line-height: 18px;
+}
+
+.moving-up {
+  animation: moving-up 0.4s ease-in-out both;
+}
+
+@keyframes moving-up {
+  0% {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+  5% {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }/*# sourceMappingURL=style.css.map */
