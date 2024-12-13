@@ -80,10 +80,6 @@ document.getElementById('close-start-page').addEventListener('click', () => {
 	document.getElementById('main-content').classList.remove('main__wrapper--is-hidden');
 });
 
-// Для отладки!!!!!
-document.getElementById('start-page').classList.add('page-start--is-hidden');
-document.getElementById('main-content').classList.remove('main__wrapper--is-hidden');
-
 const lockScrollPageToggle = () => {
 	main.classList.toggle('main--is-locked');
 }
@@ -133,6 +129,16 @@ const audioToggler = (audioSrc, playButton) => {
 	if (playButton)	playButton.classList.toggle("modal__audio--is-active");
 }
 
+const addAnimation = (parent, data) => {
+	data.split('<br>').forEach((paragraph, index) => {
+		let paragraphFormatted = createModalElement('p', 'moving-up', paragraph);
+
+		paragraphFormatted.style.animationDelay = `${index * 0.2}s`;
+
+		parent.appendChild(paragraphFormatted);
+	});
+}
+
 const createCampModal = (data) => {
 	const modalClassModifier = Object.keys(data.purpose)[0];
 
@@ -155,21 +161,20 @@ const createCampModal = (data) => {
 
 	const playEl = createModalElement('button', 'modal__audio');
 	const closeEl = createModalElement('button', 'modal__close');
-	const imgEl = createModalElement('img', 'modal__img', false, [{src: `./i/camp_${data.id.toLowerCase()}.png`, alt: `Фото лагеря «${data.name}»`}]);
+
+	const imWrapper = createModalElement('div', 'modal-img', false, [{src: `./i/camps/camp_${data.id.toLowerCase()}.jpg`, alt: `Фото лагеря «${data.name}»`}]);
+	const imgEl = createModalElement('img', 'modal-img__item', false, [{src: `./i/camps/camp_${data.id.toLowerCase()}.jpg`, alt: `Фото лагеря «${data.name}»`}]);
+	const imgCaption = createModalElement('span', 'modal-img__caption', `Фото: ${data.photoInfo}`);
+
+	packingElements(imWrapper, [imgEl, imgCaption]);
 
 	const textWrapperEl = createModalElement('div', 'modal__wrapper');
 
-	data.content.split('<br>').forEach((paragraph, index) => {
-		let paragraphFormatted = createModalElement('p', 'moving-up', paragraph);
-
-		paragraphFormatted.style.animationDelay = `${index * 0.2}s`;
-
-		textWrapperEl.appendChild(paragraphFormatted);
-	});
+	addAnimation(textWrapperEl, data.content);
 
 	const contentEl = createModalElement('div', 'modal__content');
 
-	packingElements(contentEl, [textWrapperEl, imgEl]);
+	packingElements(contentEl, [textWrapperEl, imWrapper]);
 
 	closeEl.addEventListener('click', () => {
         lockScrollPageToggle();
@@ -213,14 +218,27 @@ const createModal = (title, content, classModifier) => {
 const createContentForModal = (contentArr, buttonCaptionKey, isShowCampByCountry) => {
 	const modalContent = createModalElement('ol', 'modal__list');
 
-	contentArr.forEach((contentElement) => {
-		const itemEl = createModalElement('li', 'modal__item');
+	const addLocalAnimation = ((element, index, arrLength) => {
+		if (arrLength > 28 && index > 26) {
+			let j = index - 28;
+			element.style.animationDelay = `${j * 0.1}s`;
+		} else {
+			element.style.animationDelay = `${index * 0.1}s`;
+		}
+	});
+
+	contentArr.forEach((contentElement, index) => {
+		const itemEl = createModalElement('li', 'modal__item moving-up');
+
+		addLocalAnimation(itemEl, index, contentArr.length);
+		
 		const buttonEl = createModalElement('button', 'modal__button', contentElement[buttonCaptionKey]);
 		buttonEl.addEventListener('click', () => {
 			hideAllCamps();
 			removeModal(openedModal);
 			isShowCampByCountry ? showCampsInCountry(contentElement.id) : showCampByFilter(contentElement.id);;
 		});
+
 		itemEl.appendChild(buttonEl);
 		modalContent.appendChild(itemEl);
 	});
@@ -242,8 +260,10 @@ topBarFilters.forEach((button) => {
 				createModal('По алфавиту', alphabetContent, 'has-fixed-size');
 				break;
 			case 'about':
-				const aboutContent = `<div style="margin-left:7rem;margin-right:3rem;"><p>По&nbsp;некоторым данным не&nbsp;менее 18&nbsp;миллионов человек прошли через концентрационные лагеря нацистской германии с&nbsp;1936 по&nbsp;1945&nbsp;г.&nbsp;г.<br>Из&nbsp;них могло быть уничтожено не&nbsp;менее 11&nbsp;миллионов.</p><p>Нацисты использовали лагеря для бесчеловечных медицинских опытов, для рабского труда и&nbsp;издевательств. Помимо этого они просто уничтожали узников в&nbsp;газовых камерах.</p><p>В&nbsp;нашем спецпроекте мы&nbsp;собрали информацию обо всех этих лагерях, где они находились, какие ужасы в&nbsp;них творились, а&nbsp;также о&nbsp;том, кто и&nbsp;когда освободил выживших узников концлагерей.</p><p>Наш проект мы&nbsp;посвящаем памяти всех погибших!<br>Чтобы никто и&nbsp;никогда не&nbsp;забыл о&nbsp;чудовищных преступлениях нацистов!</p><div>`
-				createModal('О проекте', aboutContent);
+				const aboutTextContent = 'По&nbsp;некоторым данным не&nbsp;менее 18&nbsp;миллионов человек прошли через концентрационные лагеря нацистской германии с&nbsp;1936 по&nbsp;1945&nbsp;г.&nbsp;г.<br>Из&nbsp;них могло быть уничтожено не&nbsp;менее 11&nbsp;миллионов.<splitTag>Нацисты использовали лагеря для бесчеловечных медицинских опытов, для рабского труда и&nbsp;издевательств. Помимо этого они просто уничтожали узников в&nbsp;газовых камерах.<splitTag>В&nbsp;нашем спецпроекте мы&nbsp;собрали информацию обо всех этих лагерях, где они находились, какие ужасы в&nbsp;них творились, а&nbsp;также о&nbsp;том, кто и&nbsp;когда освободил выживших узников концлагерей.<splitTag>Наш проект мы&nbsp;посвящаем памяти всех погибших!<br>Чтобы никто и&nbsp;никогда не&nbsp;забыл о&nbsp;чудовищных преступлениях нацистов!';
+				const aboutContentWrapper = createModalElement('div', false, aboutTextContent, [{style: 'margin-left:7rem;margin-right:3rem;'}]);
+				addAnimation(aboutContentWrapper, aboutTextContent);
+				createModal('О проекте', aboutContentWrapper);
 				break;
 			default:
 				break;
