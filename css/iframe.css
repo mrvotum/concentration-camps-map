@@ -1,0 +1,32 @@
+html {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+html::before {
+  position: absolute;
+  content: "";
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-image: url(../i/bg_2x.png);
+  filter: blur(4px);
+  z-index: -1;
+}
+
+.iframe {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  max-width: 1300px;
+  max-height: 480px;
+  box-shadow: 7px 6px 10px rgba(0, 0, 0, 0.25);
+}
+.iframe > * {
+  flex-grow: 1;
+}/*# sourceMappingURL=iframe.css.map */

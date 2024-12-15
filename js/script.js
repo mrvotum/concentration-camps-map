@@ -45,8 +45,12 @@ const countries = [
 	},
 ];
 const map = document.getElementById('map');
+const mapDefaultViewBox = map.getAttribute('viewBox');
 const mapWrapper = document.getElementById('mapWrapper');
 const main = document.getElementById('main');
+
+let currentScale = 1;
+let campInCurrentFocus = 'Yagala';
 
 let openedModal = null;
 
@@ -60,6 +64,7 @@ audio.addEventListener('ended', () => {
 });
 
 const allFiltersButtons = document.querySelectorAll('[data-filter]');
+const allFiltersButtonsImg = Array.from(document.querySelectorAll('[data-filter-img]'));
 const allSvgCamps = Array.from(map.querySelectorAll('.map__camp'));
 const allSvgCountries = Array.from(map.querySelectorAll('[country]'));
 
@@ -80,6 +85,10 @@ document.getElementById('close-start-page').addEventListener('click', () => {
 	document.getElementById('main-content').classList.remove('main__wrapper--is-hidden');
 });
 
+// Для отладки!!!!!
+// document.getElementById('start-page').classList.add('page-start--is-hidden');
+// document.getElementById('main-content').classList.remove('main__wrapper--is-hidden');
+
 const lockScrollPageToggle = () => {
 	main.classList.toggle('main--is-locked');
 }
@@ -98,7 +107,7 @@ const packingElements = (parentElement, childrenElements) => {
 
 const createModalElement = (tag, className, textContent, attributes) => {
 	const tagEl = document.createElement(tag);
-	tagEl.className = className;
+	if (className) tagEl.className = className;
 
 	if (textContent) {
 		if (typeof textContent === 'object') tagEl.appendChild(textContent);
@@ -130,7 +139,7 @@ const audioToggler = (audioSrc, playButton) => {
 }
 
 const addAnimation = (parent, data) => {
-	data.split('<br>').forEach((paragraph, index) => {
+	data.split('<splitTag>').forEach((paragraph, index) => {
 		let paragraphFormatted = createModalElement('p', 'moving-up', paragraph);
 
 		paragraphFormatted.style.animationDelay = `${index * 0.2}s`;
@@ -153,17 +162,17 @@ const createCampModal = (data) => {
 	titleWrapperEl.appendChild(countryEl);
 
 	for (key in data.purpose) {
-	const imgEl = createModalElement('img', 'modal-title__img', false, [{src: `./i/ico_camp_${key}_2x.png`}, {alt: key}]);
+	const imgEl = createModalElement('img', 'modal-title__img', false, [{src: `./i/ico_camp_${key}_2x.png`}, {alt: key}, {loading: "lazy"}]);
 		titleWrapperEl.appendChild(imgEl);
 	};
 
-	titleBlockEl.appendChild(titleWrapperEl);	
+	titleBlockEl.appendChild(titleWrapperEl);
 
 	const playEl = createModalElement('button', 'modal__audio');
 	const closeEl = createModalElement('button', 'modal__close');
 
 	const imWrapper = createModalElement('div', 'modal-img', false, [{src: `./i/camps/camp_${data.id.toLowerCase()}.jpg`, alt: `Фото лагеря «${data.name}»`}]);
-	const imgEl = createModalElement('img', 'modal-img__item', false, [{src: `./i/camps/camp_${data.id.toLowerCase()}.jpg`, alt: `Фото лагеря «${data.name}»`}]);
+	const imgEl = createModalElement('img', 'modal-img__item', false, [{src: `./i/camps/camp_${data.id.toLowerCase()}.jpg`, alt: `Фото лагеря «${data.name}»`}, {loading: "lazy"}]);
 	const imgCaption = createModalElement('span', 'modal-img__caption', `Фото: ${data.photoInfo}`);
 
 	packingElements(imWrapper, [imgEl, imgCaption]);
@@ -220,7 +229,7 @@ const createContentForModal = (contentArr, buttonCaptionKey, isShowCampByCountry
 
 	const addLocalAnimation = ((element, index, arrLength) => {
 		if (arrLength > 28 && index > 26) {
-			let j = index - 28;
+			let j = index - 27;
 			element.style.animationDelay = `${j * 0.1}s`;
 		} else {
 			element.style.animationDelay = `${index * 0.1}s`;
@@ -231,12 +240,14 @@ const createContentForModal = (contentArr, buttonCaptionKey, isShowCampByCountry
 		const itemEl = createModalElement('li', 'modal__item moving-up');
 
 		addLocalAnimation(itemEl, index, contentArr.length);
-		
+
 		const buttonEl = createModalElement('button', 'modal__button', contentElement[buttonCaptionKey]);
 		buttonEl.addEventListener('click', () => {
 			hideAllCamps();
 			removeModal(openedModal);
-			isShowCampByCountry ? showCampsInCountry(contentElement.id) : showCampByFilter(contentElement.id);;
+			isShowCampByCountry ? showCampsInCountry(contentElement.id) : showCampByFilter(contentElement.id);
+			campInCurrentFocus = contentElement.id;
+			focusOnElement(contentElement.id, false, true);
 		});
 
 		itemEl.appendChild(buttonEl);
@@ -261,7 +272,7 @@ topBarFilters.forEach((button) => {
 				break;
 			case 'about':
 				const aboutTextContent = 'По&nbsp;некоторым данным не&nbsp;менее 18&nbsp;миллионов человек прошли через концентрационные лагеря нацистской германии с&nbsp;1936 по&nbsp;1945&nbsp;г.&nbsp;г.<br>Из&nbsp;них могло быть уничтожено не&nbsp;менее 11&nbsp;миллионов.<splitTag>Нацисты использовали лагеря для бесчеловечных медицинских опытов, для рабского труда и&nbsp;издевательств. Помимо этого они просто уничтожали узников в&nbsp;газовых камерах.<splitTag>В&nbsp;нашем спецпроекте мы&nbsp;собрали информацию обо всех этих лагерях, где они находились, какие ужасы в&nbsp;них творились, а&nbsp;также о&nbsp;том, кто и&nbsp;когда освободил выживших узников концлагерей.<splitTag>Наш проект мы&nbsp;посвящаем памяти всех погибших!<br>Чтобы никто и&nbsp;никогда не&nbsp;забыл о&nbsp;чудовищных преступлениях нацистов!';
-				const aboutContentWrapper = createModalElement('div', false, aboutTextContent, [{style: 'margin-left:7rem;margin-right:3rem;'}]);
+				const aboutContentWrapper = createModalElement('div', false, false, [{style: 'margin-left:7rem;margin-right:3rem;'}]);
 				addAnimation(aboutContentWrapper, aboutTextContent);
 				createModal('О проекте', aboutContentWrapper);
 				break;
@@ -311,6 +322,8 @@ const hideAllCamps = (isReverse) => {
 }
 
 const showCampsByFilter = (filter) => {
+	resetMapScale();
+
 	if (filter !== 'all') {
 		hideAllCamps();
 	} else {
@@ -333,9 +346,24 @@ const showCampByFilter = (id) => {
 	});
 };
 
+const changeHoverImg = (filter, isHover) => {
+	const img = allFiltersButtonsImg.filter((img) => filter === img.getAttribute('data-filter-img'))[0];
+
+	img.src = isHover ? `./i/ico_camp_${filter}_h.png` : `./i/ico_camp_${filter}.png`;
+	img.srcset = isHover ? `./i/ico_camp_${filter}_h_2x.png 2x` : `./i/ico_camp_${filter}_2x.png 2x`;
+};
+
 allFiltersButtons.forEach((el) => {
 	el.addEventListener("click", () => {
 		showCampsByFilter(el.getAttribute('data-filter'))
+	});
+
+	el.addEventListener("mouseover", () => {
+		changeHoverImg(el.getAttribute('data-filter'), true);
+	});
+
+	el.addEventListener("mouseout", () => {
+		changeHoverImg(el.getAttribute('data-filter'));
 	});
 });
 // filters
@@ -346,7 +374,7 @@ let tooltipElem;
 const createTooltipsData = () => {
 	allSvgCamps.forEach((el) => {
 		let camp = jsonData.find((camp) => {return camp.id === el.getAttribute('id')});
-	
+
 		el.setAttribute('data-tooltip', camp.name);
 	});
 }
@@ -355,13 +383,13 @@ allSvgCamps.forEach((el) => {
 	el.addEventListener("mouseover", (event) => {
 		let tooltipHtml = el.dataset.tooltip;
 		if (!tooltipHtml) return;
-	
+
 		tooltipElem = createModalElement('div', 'tooltip', tooltipHtml);
 		mapWrapper.appendChild(tooltipElem);
-	
+
 		let left = event.layerX + 15;
 		let top = event.layerY;
-	
+
 		tooltipElem.style.left = left + 'px';
 		tooltipElem.style.top = top + 'px';
 	});
@@ -373,3 +401,69 @@ allSvgCamps.forEach((el) => {
 		}
 	});
 });
+
+
+const resetMapScale = () => {
+	map.setAttribute('viewBox', mapDefaultViewBox);
+	currentScale = 1;
+}
+
+// Функция для увеличения элемента SVG
+const focusOnElement = (elementId, scale, isIncrease) => {
+	if (!scale) resetMapScale();
+
+	if (scale) {
+		if (scale >= 3) scale = 3;
+		else if (scale < 1) scale = 1;
+	} else {
+		scale = 3;
+	}
+
+	const element = map.getElementById(elementId);
+
+	// Получение размеров элемента и SVG
+	const elementBBox = element.getBBox();
+	const viewBox = map.getAttribute('viewBox').split(' ').map(parseFloat);
+	if (viewBox.length !== 4 || viewBox.some(isNaN)) {
+		console.error('Некорректный viewBox у SVG');
+		return;
+	}
+
+	const [currentX, currentY, currentWidth, currentHeight] = viewBox;
+
+	// Новые размеры viewBox
+	const newWidth = isIncrease ? currentWidth / scale : currentWidth * scale;
+	const newHeight = isIncrease ? currentHeight / scale : currentHeight * scale;
+
+	// Центрирование элемента в контейнере
+	const elementCenterX = elementBBox.x + elementBBox.width / 2;
+	const elementCenterY = elementBBox.y + elementBBox.height / 2 + 50;
+
+	const newX = elementCenterX - newWidth / 2;
+	const newY = elementCenterY - newHeight / 2;
+
+	map.setAttribute('viewBox', `${newX} ${newY} ${newWidth} ${newHeight}`);
+	currentScale = scale;
+}
+
+const scaleButtons = document.querySelectorAll('[data-scale-button]');
+scaleButtons.forEach(button => {
+	button.addEventListener('click', () => {
+		const isZoomIn = button.dataset.scaleButton === 'increase';
+
+		if (isZoomIn && currentScale >= 2) {
+			return
+		} else if (!isZoomIn && currentScale <= 1.2) {
+			resetMapScale();
+			return
+		} else if (!isZoomIn && currentScale === 3) {
+			currentScale = 2;
+		}
+
+		currentScale *= isZoomIn ? 1.2 : 0.9;
+
+		focusOnElement(campInCurrentFocus, currentScale, isZoomIn);
+	});
+});
+
+
