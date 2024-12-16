@@ -422,15 +422,19 @@ html {
   padding-left: calc(35 / 16 * 1rem);
   padding-right: calc(25 / 16 * 1rem);
   margin-right: calc(30 / 16 * 1rem);
+}
+.modal__content:not(.modal--without-scroll .modal__content) {
   overflow: hidden auto;
 }
 .modal__content:not(.modal--has-fixed-size .modal__content) {
   max-height: calc(100% - calc(75 / 16 * 1rem));
-  overflow: hidden;
 }
 .modal--has-fixed-size .modal__content {
   max-height: calc(223 / 16 * 1rem);
   flex-direction: column;
+}
+.modal--without-scroll .modal__content {
+  overflow: hidden;
 }
 .modal__content::-webkit-scrollbar {
   width: 2px;
