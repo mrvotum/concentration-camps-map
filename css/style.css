@@ -271,11 +271,14 @@ html {
   top: 0;
   bottom: 0;
   left: 0;
+  width: 1300px;
+  height: 480px;
 }
 
 .map {
-  position: absolute;
   z-index: 50;
+  width: 1300px;
+  height: 480px;
 }
 .map__country {
   transition: fill 0.1s ease-in-out;
@@ -410,6 +413,9 @@ html {
 }
 .modal__audio--is-active {
   background-image: url(../i/audio-off.png);
+}
+.modal__audio--is-hidden {
+  display: none;
 }
 .modal__wrapper {
   display: flex;

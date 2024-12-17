@@ -45,12 +45,15 @@ const countries = [
 	},
 ];
 const map = document.getElementById('map');
-const mapDefaultViewBox = map.getAttribute('viewBox');
+const mapSvg = document.getElementById('mapSvg');
+// const mapDefaultViewBox = map.getAttribute('viewBox');
 const mapWrapper = document.getElementById('mapWrapper');
 const main = document.getElementById('main');
 
-let currentScale = 1;
-let campInCurrentFocus = 'Yagala';
+let oldCoords = {x: 0, y: 0};
+
+// let currentScale = 1;
+// let campInCurrentFocus = 'Yagala';
 
 let openedModal = null;
 
@@ -65,8 +68,8 @@ audio.addEventListener('ended', () => {
 
 const allFiltersButtons = document.querySelectorAll('[data-filter]');
 const allFiltersButtonsImg = Array.from(document.querySelectorAll('[data-filter-img]'));
-const allSvgCamps = Array.from(map.querySelectorAll('.map__camp'));
-const allSvgCountries = Array.from(map.querySelectorAll('[country]'));
+const allSvgCamps = Array.from(mapSvg.querySelectorAll('.map__camp'));
+const allSvgCountries = Array.from(mapSvg.querySelectorAll('[country]'));
 
 const createJson = (inputJsonData) => {
 	inputJsonData.forEach((element) => {
@@ -79,6 +82,12 @@ const data = fetch("./data/data.json")
 	.then((data) => createJson(data))
 	.then(() => createTooltipsData());
 
+const pz = panzoom(map, {
+	bounds: true,
+	boundsPadding: 1,
+	maxZoom: 3,
+	minZoom: 1
+});
 
 document.getElementById('close-start-page').addEventListener('click', () => {
 	document.getElementById('start-page').classList.add('page-start--is-hidden');
@@ -192,7 +201,7 @@ const createCampModal = (data) => {
     });
 
 	playEl.addEventListener('click', () => {
-		audioToggler(data.audio, playEl);
+		audioToggler(data.id, playEl);
     });
 
 	packingElements(headerEl, [titleBlockEl, playEl, closeEl]);
@@ -201,10 +210,11 @@ const createCampModal = (data) => {
 	main.appendChild(modalEl);
 }
 
-const createModal = (title, content, classModifier) => {
+const createModal = (title, content, classModifier, audioId) => {
 	const modalEl = createModalElement('div', 'modal');
 	const headerEl = createModalElement('div', 'modal__header');
 	const titleEl = createModalElement('h2', 'modal-title__caption', title);
+	const playEl = createModalElement('button', 'modal__audio');
 	const closeEl = createModalElement('button', 'modal__close');
 	const contentEl = createModalElement('div', 'modal__content', content);
 
@@ -215,10 +225,22 @@ const createModal = (title, content, classModifier) => {
 	openedModal = modalEl;
 
 	closeEl.addEventListener('click', () => {
-		removeModal(modalEl);
+        lockScrollPageToggle();
+		modalEl.remove();
+		if (audioId) {
+			audioToggler();
+		}
     });
 
-	packingElements(headerEl, [titleEl, closeEl]);
+	if (audioId) {
+		playEl.addEventListener('click', () => {
+			audioToggler(audioId, playEl);
+		});
+	} else {
+		playEl.classList.add('modal__audio--is-hidden')
+	}
+
+	packingElements(headerEl, [titleEl, playEl, closeEl]);
 	packingElements(modalEl, [headerEl, contentEl]);
 
 	main.appendChild(modalEl);
@@ -247,7 +269,8 @@ const createContentForModal = (contentArr, buttonCaptionKey, isShowCampByCountry
 			removeModal(openedModal);
 			isShowCampByCountry ? showCampsInCountry(contentElement.id) : showCampByFilter(contentElement.id);
 			campInCurrentFocus = contentElement.id;
-			focusOnElement(contentElement.id, false, true);
+			// focusOnElement(contentElement.id, false, true);
+			focusOnElement(contentElement.id);
 		});
 
 		itemEl.appendChild(buttonEl);
@@ -274,7 +297,7 @@ topBarFilters.forEach((button) => {
 				const aboutTextContent = 'По&nbsp;некоторым данным не&nbsp;менее 18&nbsp;миллионов человек прошли через концентрационные лагеря нацистской германии с&nbsp;1936 по&nbsp;1945&nbsp;г.&nbsp;г.<br>Из&nbsp;них могло быть уничтожено не&nbsp;менее 11&nbsp;миллионов.<splitTag>Нацисты использовали лагеря для бесчеловечных медицинских опытов, для рабского труда и&nbsp;издевательств. Помимо этого они просто уничтожали узников в&nbsp;газовых камерах.<splitTag>В&nbsp;нашем спецпроекте мы&nbsp;собрали информацию обо всех этих лагерях, где они находились, какие ужасы в&nbsp;них творились, а&nbsp;также о&nbsp;том, кто и&nbsp;когда освободил выживших узников концлагерей.<splitTag>Наш проект мы&nbsp;посвящаем памяти всех погибших!<br>Чтобы никто и&nbsp;никогда не&nbsp;забыл о&nbsp;чудовищных преступлениях нацистов!';
 				const aboutContentWrapper = createModalElement('div', false, false, [{style: 'margin-left:7rem;margin-right:3rem;'}]);
 				addAnimation(aboutContentWrapper, aboutTextContent);
-				createModal('О проекте', aboutContentWrapper);
+				createModal('О проекте', aboutContentWrapper, ['without-scroll'], 'About');
 				break;
 			default:
 				break;
@@ -282,7 +305,7 @@ topBarFilters.forEach((button) => {
     });
 });
 
-map.addEventListener('click', (event) => {
+mapSvg.addEventListener('click', (event) => {
 	if (event.target.classList.contains('map__camp') && !main.classList.contains('main--is-locked')) {
 		lockScrollPageToggle();
 
@@ -296,7 +319,7 @@ map.addEventListener('click', (event) => {
 
 // filters
 const showCampsInCountry = (id) => {
-	const country = map.getElementById(id);
+	const country = mapSvg.getElementById(id);
 
 	if (!country) {console.error(`Country "${id}" not found`); return}
 
@@ -322,7 +345,7 @@ const hideAllCamps = (isReverse) => {
 }
 
 const showCampsByFilter = (filter) => {
-	resetMapScale();
+	// resetMapScale();
 
 	if (filter !== 'all') {
 		hideAllCamps();
@@ -337,6 +360,7 @@ const showCampsByFilter = (filter) => {
 		}
 	});
 };
+
 
 const showCampByFilter = (id) => {
 	allSvgCamps.filter((camp) => {
@@ -402,68 +426,132 @@ allSvgCamps.forEach((el) => {
 	});
 });
 
+const focusOnElement = (elementId)  => {
+	const camp = mapSvg.getElementById(elementId);
 
-const resetMapScale = () => {
-	map.setAttribute('viewBox', mapDefaultViewBox);
-	currentScale = 1;
+	if (oldCoords.x || oldCoords.y) {
+		pz.zoomTo(oldCoords.x, oldCoords.y, 1);
+	}
+
+	setTimeout(() => {
+		const elementRect = camp.getBoundingClientRect();
+
+		const elementCenterX = elementRect.x + elementRect.width / 2;
+		const elementCenterY = camp.getBoundingClientRect().y;
+
+		pz.smoothZoom(elementCenterX, elementCenterY + 40, 2.5);
+
+		oldCoords = {x: elementCenterX, y: elementCenterY};
+
+		// pz.dispose();
+	}, 10);
 }
+
+
+
+
+
+
+// const resetMapScale = () => {
+// 	map.setAttribute('viewBox', mapDefaultViewBox);
+// 	currentScale = 1;
+// }
 
 // Функция для увеличения элемента SVG
-const focusOnElement = (elementId, scale, isIncrease) => {
-	if (!scale) resetMapScale();
+// const focusOnElement = (elementId, scale, isIncrease) => {
+// 	if (!scale) resetMapScale();
 
-	if (scale) {
-		if (scale >= 3) scale = 3;
-		else if (scale < 1) scale = 1;
-	} else {
-		scale = 3;
-	}
+// 	if (scale) {
+// 		if (scale >= 3) scale = 3;
+// 		else if (scale < 1) scale = 1;
+// 	} else {
+// 		scale = 3;
+// 	}
 
-	const element = map.getElementById(elementId);
+// 	const element = map.getElementById(elementId);
 
-	// Получение размеров элемента и SVG
-	const elementBBox = element.getBBox();
-	const viewBox = map.getAttribute('viewBox').split(' ').map(parseFloat);
-	if (viewBox.length !== 4 || viewBox.some(isNaN)) {
-		console.error('Некорректный viewBox у SVG');
-		return;
-	}
+// 	// Получение размеров элемента и SVG
+// 	const elementBBox = element.getBBox();
+// 	const viewBox = map.getAttribute('viewBox').split(' ').map(parseFloat);
+// 	if (viewBox.length !== 4 || viewBox.some(isNaN)) {
+// 		console.error('Некорректный viewBox у SVG');
+// 		return;
+// 	}
 
-	const [currentX, currentY, currentWidth, currentHeight] = viewBox;
+// 	const [currentX, currentY, currentWidth, currentHeight] = viewBox;
 
-	// Новые размеры viewBox
-	const newWidth = isIncrease ? currentWidth / scale : currentWidth * scale;
-	const newHeight = isIncrease ? currentHeight / scale : currentHeight * scale;
+// 	// Новые размеры viewBox
+// 	const newWidth = isIncrease ? currentWidth / scale : currentWidth * scale;
+// 	const newHeight = isIncrease ? currentHeight / scale : currentHeight * scale;
 
-	// Центрирование элемента в контейнере
-	const elementCenterX = elementBBox.x + elementBBox.width / 2;
-	const elementCenterY = elementBBox.y + elementBBox.height / 2 + 50;
+// 	// Центрирование элемента в контейнере
+// 	const elementCenterX = elementBBox.x + elementBBox.width / 2;
+// 	const elementCenterY = elementBBox.y + elementBBox.height / 2 + 50;
 
-	const newX = elementCenterX - newWidth / 2;
-	const newY = elementCenterY - newHeight / 2;
+// 	const newX = elementCenterX - newWidth / 2;
+// 	const newY = elementCenterY - newHeight / 2;
 
-	map.setAttribute('viewBox', `${newX} ${newY} ${newWidth} ${newHeight}`);
-	currentScale = scale;
-}
+// 	map.setAttribute('viewBox', `${newX} ${newY} ${newWidth} ${newHeight}`);
+// 	currentScale = scale;
+// }
+
+// let lastEventTime = 0;
+
+// mapWrapper.addEventListener("wheel", (event) => {
+// 	const currentTime = new Date().getTime();
+// 	const timeDiff = currentTime - lastEventTime;
+// 	lastEventTime = currentTime;
+
+// 	// Определяем направление прокрутки
+// 	const isZoomIn = event.deltaY > 0 ? false : true;
+
+// 	if (isZoomIn && currentScale >= 2) {
+// 		return
+// 	} else if (!isZoomIn && currentScale <= 1.2) {
+// 		resetMapScale();
+// 		return
+// 	} else if (!isZoomIn && currentScale === 3) {
+// 		currentScale = 2;
+// 	}
+
+// 	// Определяем источник прокрутки
+// 	const isTrackpad = timeDiff < 120 || Math.abs(event.deltaY) < 15;
+// 	const isMouse = !isTrackpad;
+
+// 	if (isTrackpad) {
+// 		console.log(`Прокрутка с трекпада: ${isZoomIn}`);
+// 	} else if (isMouse) {
+// 		console.log(`Прокрутка с мыши: ${isZoomIn}`);
+// 	}
+
+// 	currentScale *= isZoomIn ? 1.2 : 0.9;
+
+// 	focusOnElement(campInCurrentFocus, currentScale, isZoomIn);
+// });
+
+
 
 const scaleButtons = document.querySelectorAll('[data-scale-button]');
+
 scaleButtons.forEach(button => {
 	button.addEventListener('click', () => {
 		const isZoomIn = button.dataset.scaleButton === 'increase';
 
-		if (isZoomIn && currentScale >= 2) {
-			return
-		} else if (!isZoomIn && currentScale <= 1.2) {
-			resetMapScale();
-			return
-		} else if (!isZoomIn && currentScale === 3) {
-			currentScale = 2;
-		}
+		// if (isZoomIn && currentScale >= 2) {
+		// 	return
+		// } else if (!isZoomIn && currentScale <= 1.2) {
+		// 	resetMapScale();
+		// 	return
+		// } else if (!isZoomIn && currentScale === 3) {
+		// 	currentScale = 2;
+		// }
 
-		currentScale *= isZoomIn ? 1.2 : 0.9;
+		// currentScale *= isZoomIn ? 1.2 : 0.9;
 
-		focusOnElement(campInCurrentFocus, currentScale, isZoomIn);
+		let zoomBy = isZoomIn ? 2 : 0.5;
+		if (oldCoords.x || oldCoords.y) pz.smoothZoom(oldCoords.x, oldCoords.y, zoomBy);
+		else pz.smoothZoom(1300/2, 480/2, zoomBy);
+
+		// focusOnElement(campInCurrentFocus, currentScale, isZoomIn);
 	});
 });
-
-
