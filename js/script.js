@@ -430,7 +430,7 @@ const focusOnElement = (elementId)  => {
 	const camp = mapSvg.getElementById(elementId);
 
 	if (oldCoords.x || oldCoords.y) {
-		pz.zoomTo(oldCoords.x, oldCoords.y, 1);
+		pz.zoomTo(oldCoords.x, oldCoords.y, 0.25);
 	}
 
 	setTimeout(() => {
@@ -442,15 +442,8 @@ const focusOnElement = (elementId)  => {
 		pz.smoothZoom(elementCenterX, elementCenterY + 40, 2.5);
 
 		oldCoords = {x: elementCenterX, y: elementCenterY};
-
-		// pz.dispose();
-	}, 10);
+	}, 100);
 }
-
-
-
-
-
 
 // const resetMapScale = () => {
 // 	map.setAttribute('viewBox', mapDefaultViewBox);
