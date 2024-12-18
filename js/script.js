@@ -46,14 +46,10 @@ const countries = [
 ];
 const map = document.getElementById('map');
 const mapSvg = document.getElementById('mapSvg');
-// const mapDefaultViewBox = map.getAttribute('viewBox');
 const mapWrapper = document.getElementById('mapWrapper');
 const main = document.getElementById('main');
 
 let oldCoords = {x: 0, y: 0};
-
-// let currentScale = 1;
-// let campInCurrentFocus = 'Yagala';
 
 let openedModal = null;
 
@@ -95,8 +91,8 @@ document.getElementById('close-start-page').addEventListener('click', () => {
 });
 
 // Для отладки!!!!!
-document.getElementById('start-page').classList.add('page-start--is-hidden');
-document.getElementById('main-content').classList.remove('main__wrapper--is-hidden');
+// document.getElementById('start-page').classList.add('page-start--is-hidden');
+// document.getElementById('main-content').classList.remove('main__wrapper--is-hidden');
 
 const lockScrollPageToggle = () => {
 	main.classList.toggle('main--is-locked');
@@ -269,7 +265,6 @@ const createContentForModal = (contentArr, buttonCaptionKey, isShowCampByCountry
 			removeModal(openedModal);
 			isShowCampByCountry ? showCampsInCountry(contentElement.id) : showCampByFilter(contentElement.id);
 			campInCurrentFocus = contentElement.id;
-			// focusOnElement(contentElement.id, false, true);
 			focusOnElement(contentElement.id);
 		});
 
@@ -345,8 +340,6 @@ const hideAllCamps = (isReverse) => {
 }
 
 const showCampsByFilter = (filter) => {
-	// resetMapScale();
-
 	if (filter !== 'all') {
 		hideAllCamps();
 	} else {
@@ -445,106 +438,14 @@ const focusOnElement = (elementId)  => {
 	}, 100);
 }
 
-// const resetMapScale = () => {
-// 	map.setAttribute('viewBox', mapDefaultViewBox);
-// 	currentScale = 1;
-// }
-
-// Функция для увеличения элемента SVG
-// const focusOnElement = (elementId, scale, isIncrease) => {
-// 	if (!scale) resetMapScale();
-
-// 	if (scale) {
-// 		if (scale >= 3) scale = 3;
-// 		else if (scale < 1) scale = 1;
-// 	} else {
-// 		scale = 3;
-// 	}
-
-// 	const element = map.getElementById(elementId);
-
-// 	// Получение размеров элемента и SVG
-// 	const elementBBox = element.getBBox();
-// 	const viewBox = map.getAttribute('viewBox').split(' ').map(parseFloat);
-// 	if (viewBox.length !== 4 || viewBox.some(isNaN)) {
-// 		console.error('Некорректный viewBox у SVG');
-// 		return;
-// 	}
-
-// 	const [currentX, currentY, currentWidth, currentHeight] = viewBox;
-
-// 	// Новые размеры viewBox
-// 	const newWidth = isIncrease ? currentWidth / scale : currentWidth * scale;
-// 	const newHeight = isIncrease ? currentHeight / scale : currentHeight * scale;
-
-// 	// Центрирование элемента в контейнере
-// 	const elementCenterX = elementBBox.x + elementBBox.width / 2;
-// 	const elementCenterY = elementBBox.y + elementBBox.height / 2 + 50;
-
-// 	const newX = elementCenterX - newWidth / 2;
-// 	const newY = elementCenterY - newHeight / 2;
-
-// 	map.setAttribute('viewBox', `${newX} ${newY} ${newWidth} ${newHeight}`);
-// 	currentScale = scale;
-// }
-
-// let lastEventTime = 0;
-
-// mapWrapper.addEventListener("wheel", (event) => {
-// 	const currentTime = new Date().getTime();
-// 	const timeDiff = currentTime - lastEventTime;
-// 	lastEventTime = currentTime;
-
-// 	// Определяем направление прокрутки
-// 	const isZoomIn = event.deltaY > 0 ? false : true;
-
-// 	if (isZoomIn && currentScale >= 2) {
-// 		return
-// 	} else if (!isZoomIn && currentScale <= 1.2) {
-// 		resetMapScale();
-// 		return
-// 	} else if (!isZoomIn && currentScale === 3) {
-// 		currentScale = 2;
-// 	}
-
-// 	// Определяем источник прокрутки
-// 	const isTrackpad = timeDiff < 120 || Math.abs(event.deltaY) < 15;
-// 	const isMouse = !isTrackpad;
-
-// 	if (isTrackpad) {
-// 		console.log(`Прокрутка с трекпада: ${isZoomIn}`);
-// 	} else if (isMouse) {
-// 		console.log(`Прокрутка с мыши: ${isZoomIn}`);
-// 	}
-
-// 	currentScale *= isZoomIn ? 1.2 : 0.9;
-
-// 	focusOnElement(campInCurrentFocus, currentScale, isZoomIn);
-// });
-
-
-
 const scaleButtons = document.querySelectorAll('[data-scale-button]');
 
 scaleButtons.forEach(button => {
 	button.addEventListener('click', () => {
 		const isZoomIn = button.dataset.scaleButton === 'increase';
-
-		// if (isZoomIn && currentScale >= 2) {
-		// 	return
-		// } else if (!isZoomIn && currentScale <= 1.2) {
-		// 	resetMapScale();
-		// 	return
-		// } else if (!isZoomIn && currentScale === 3) {
-		// 	currentScale = 2;
-		// }
-
-		// currentScale *= isZoomIn ? 1.2 : 0.9;
-
-		let zoomBy = isZoomIn ? 2 : 0.5;
+		const zoomBy = isZoomIn ? 2 : 0.5;
+		
 		if (oldCoords.x || oldCoords.y) pz.smoothZoom(oldCoords.x, oldCoords.y, zoomBy);
 		else pz.smoothZoom(1300/2, 480/2, zoomBy);
-
-		// focusOnElement(campInCurrentFocus, currentScale, isZoomIn);
 	});
 });
