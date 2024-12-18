@@ -428,8 +428,6 @@ html {
   padding-left: calc(35 / 16 * 1rem);
   padding-right: calc(25 / 16 * 1rem);
   margin-right: calc(30 / 16 * 1rem);
-}
-.modal__content:not(.modal--without-scroll .modal__content) {
   overflow: hidden auto;
 }
 .modal__content:not(.modal--has-fixed-size .modal__content) {
@@ -438,9 +436,6 @@ html {
 .modal--has-fixed-size .modal__content {
   max-height: calc(223 / 16 * 1rem);
   flex-direction: column;
-}
-.modal--without-scroll .modal__content {
-  overflow: hidden;
 }
 .modal__content::-webkit-scrollbar {
   width: 2px;
@@ -465,6 +460,9 @@ html {
   -moz-column-count: 2;
        column-count: 2;
   margin-left: calc(36 / 16 * 1rem);
+  list-style-type: none;
+  counter-reset: li;
+  position: relative;
 }
 .modal--has-fixed-columns .modal__list {
   -moz-column-fill: auto;
@@ -473,6 +471,16 @@ html {
 }
 .modal__item {
   text-align: start;
+  padding-left: calc(5 / 16 * 1rem);
+  display: flex;
+}
+.modal__item::before {
+  position: absolute;
+  top: 0;
+  right: 100%;
+  font-variant-numeric: tabular-nums;
+  counter-increment: li;
+  content: counters(li, ".") ". ";
 }
 .modal__button {
   text-align: start;

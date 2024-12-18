@@ -95,8 +95,8 @@ document.getElementById('close-start-page').addEventListener('click', () => {
 });
 
 // Для отладки!!!!!
-// document.getElementById('start-page').classList.add('page-start--is-hidden');
-// document.getElementById('main-content').classList.remove('main__wrapper--is-hidden');
+document.getElementById('start-page').classList.add('page-start--is-hidden');
+document.getElementById('main-content').classList.remove('main__wrapper--is-hidden');
 
 const lockScrollPageToggle = () => {
 	main.classList.toggle('main--is-locked');
@@ -294,10 +294,10 @@ topBarFilters.forEach((button) => {
 				createModal('По алфавиту', alphabetContent, 'has-fixed-size');
 				break;
 			case 'about':
-				const aboutTextContent = 'По&nbsp;некоторым данным не&nbsp;менее 18&nbsp;миллионов человек прошли через концентрационные лагеря нацистской германии с&nbsp;1936 по&nbsp;1945&nbsp;г.&nbsp;г.<br>Из&nbsp;них могло быть уничтожено не&nbsp;менее 11&nbsp;миллионов.<splitTag>Нацисты использовали лагеря для бесчеловечных медицинских опытов, для рабского труда и&nbsp;издевательств. Помимо этого они просто уничтожали узников в&nbsp;газовых камерах.<splitTag>В&nbsp;нашем спецпроекте мы&nbsp;собрали информацию обо всех этих лагерях, где они находились, какие ужасы в&nbsp;них творились, а&nbsp;также о&nbsp;том, кто и&nbsp;когда освободил выживших узников концлагерей.<splitTag>Наш проект мы&nbsp;посвящаем памяти всех погибших!<br>Чтобы никто и&nbsp;никогда не&nbsp;забыл о&nbsp;чудовищных преступлениях нацистов!';
+				const aboutTextContent = 'Система концлагерей в&nbsp;Германии возникла в&nbsp;1933&ndash;34&nbsp;гг с&nbsp;приходом к&nbsp;власти нацистов и&nbsp;достигла расцвета в&nbsp;период II&nbsp;Мировой войны: более 14&nbsp;000 таких мест было создано на&nbsp;территории рейха и&nbsp;оккупированных стран.<splitTag>Через них прошли, по&nbsp;современным оценкам, не&nbsp;менее 18&nbsp;миллионов человек, каждым пятым узником был ребенок. Приблизительное число жертв &laquo;фабрик смерти&raquo;&nbsp;&mdash; не&nbsp;менее 11&nbsp;миллионов.<splitTag>Нацисты использовали узников для принудительного труда, бесчеловечных &laquo;медицинских&raquo; экспериментов, их&nbsp;подвергали пыткам и&nbsp;издевательствам, не&nbsp;щадя ни&nbsp;женщин, ни&nbsp;детей, ни&nbsp;стариков. А&nbsp;тех, кого считали непригодным для этих целей&nbsp;&mdash; уничтожали.<splitTag>В&nbsp;нашем спецпроекте мы&nbsp;рассказываем истории 55&nbsp;нацистских концлагерей&nbsp;&mdash; для того, чтобы никогда забывать о&nbsp;чудовищной катастрофе, постигшей человечество. Пусть она никогда не&nbsp;повторится!';
 				const aboutContentWrapper = createModalElement('div', false, false, [{style: 'margin-left:7rem;margin-right:3rem;'}]);
 				addAnimation(aboutContentWrapper, aboutTextContent);
-				createModal('О проекте', aboutContentWrapper, ['without-scroll'], 'About');
+				createModal('О проекте', aboutContentWrapper, false, 'About');
 				break;
 			default:
 				break;
