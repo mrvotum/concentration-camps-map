@@ -8,6 +8,10 @@ html {
   display: flex;
   flex-direction: column;
   height: 100%;
+
+  @media (max-width: 1000px) {
+    font-size: 12px;
+  }
 }
 
 .main {
@@ -360,7 +364,7 @@ html {
   border: 1px solid #ffffff;
   padding-top: rem(15);
   padding-bottom: rem(20);
-  min-width: rem(610);
+  min-width: rem(800);
   width: calc(100vw - #{rem(400)});
   height: calc(100vh - #{rem(52)});
 

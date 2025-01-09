@@ -4,6 +4,11 @@ html {
   flex-direction: column;
   height: 100%;
 }
+@media (max-width: 1000px) {
+  html {
+    font-size: 12px;
+  }
+}
 
 .main {
   font-family: "Inter";
@@ -309,7 +314,7 @@ html {
   border: 1px solid #ffffff;
   padding-top: calc(15 / 16 * 1rem);
   padding-bottom: calc(20 / 16 * 1rem);
-  min-width: calc(610 / 16 * 1rem);
+  min-width: calc(800 / 16 * 1rem);
   width: calc(100vw - calc(400 / 16 * 1rem));
   height: calc(100vh - calc(52 / 16 * 1rem));
 }
