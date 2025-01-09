@@ -58,6 +58,8 @@ let activeSound = null;
 
 const topBarFilters = document.querySelectorAll('[top-bar-filter]');
 
+const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
+
 audio.addEventListener('ended', () => {
 	if (activeSound) activeSound.classList.remove('modal__audio--is-active');
 });
@@ -300,16 +302,24 @@ topBarFilters.forEach((button) => {
     });
 });
 
-mapSvg.addEventListener('click', (event) => {
-	if (event.target.classList.contains('map__camp') && !main.classList.contains('main--is-locked')) {
+const campClickHandler = (isTargetCamp, targetId) => {
+	if (isTargetCamp && !main.classList.contains('main--is-locked')) {
 		lockScrollPageToggle();
 
 		jsonData.filter((element) => {
-			if (element.id === event.target.id) {
+			if (element.id === targetId) {
 				createCampModal(element);
 			}
 		});
 	}
+};
+
+mapSvg.addEventListener('click', (event) => {
+	campClickHandler(event.target.classList.contains('map__camp'), event.target.id);
+})
+
+mapSvg.addEventListener('touchstart', (event) => {
+	campClickHandler(event.target.classList.contains('map__camp'), event.target.id);
 })
 
 // filters
@@ -375,13 +385,15 @@ allFiltersButtons.forEach((el) => {
 		showCampsByFilter(el.getAttribute('data-filter'))
 	});
 
-	el.addEventListener("mouseover", () => {
-		changeHoverImg(el.getAttribute('data-filter'), true);
-	});
+	if (!isTouchDevice) {
+		el.addEventListener("mouseover", () => {
+			changeHoverImg(el.getAttribute('data-filter'), true);
+		});
 
-	el.addEventListener("mouseout", () => {
-		changeHoverImg(el.getAttribute('data-filter'));
-	});
+		el.addEventListener("mouseout", () => {
+			changeHoverImg(el.getAttribute('data-filter'));
+		});
+	}
 });
 // filters
 
