@@ -473,18 +473,21 @@ html {
   list-style-type: none;
   counter-reset: li;
   position: relative;
-}
-.modal--has-fixed-columns .modal__list {
   -moz-column-fill: auto;
        column-fill: auto;
+}
+.modal--has-fixed-columns .modal__list {
   height: calc(calc(20 / 16 * 1rem) * 11);
+}
+.modal__list:not(.modal--has-fixed-columns .modal__list) {
+  height: calc(calc(20 / 16 * 1rem) * 28);
 }
 .modal__item {
   text-align: start;
   padding-left: calc(5 / 16 * 1rem);
   display: flex;
 }
-.modal__item::before {
+.modal__counter {
   position: absolute;
   top: 0;
   right: 100%;

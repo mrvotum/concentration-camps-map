@@ -92,10 +92,6 @@ document.getElementById('close-start-page').addEventListener('click', () => {
 	document.getElementById('main-content').classList.remove('main__wrapper--is-hidden');
 });
 
-// Для отладки!!!!!
-// document.getElementById('start-page').classList.add('page-start--is-hidden');
-// document.getElementById('main-content').classList.remove('main__wrapper--is-hidden');
-
 const lockScrollPageToggle = () => {
 	main.classList.toggle('main--is-locked');
 }
@@ -258,6 +254,7 @@ const createContentForModal = (contentArr, buttonCaptionKey, isShowCampByCountry
 
 	contentArr.forEach((contentElement, index) => {
 		const itemEl = createModalElement('li', 'modal__item moving-up');
+		const counter = createModalElement('span', 'modal__counter', `${index + 1}.`);
 
 		addLocalAnimation(itemEl, index, contentArr.length);
 
@@ -269,7 +266,8 @@ const createContentForModal = (contentArr, buttonCaptionKey, isShowCampByCountry
 			campInCurrentFocus = contentElement.id;
 			focusOnElement(contentElement.id);
 		});
-
+		
+		buttonEl.appendChild(counter);
 		itemEl.appendChild(buttonEl);
 		modalContent.appendChild(itemEl);
 	});

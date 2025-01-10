@@ -555,10 +555,13 @@ html {
     list-style-type: none;
     counter-reset: li;
     position: relative;
+    column-fill: auto;
 
     #{$self}--has-fixed-columns & {
-      column-fill: auto;
       height: calc(#{rem(20)} * 11);
+    }
+    &:not(#{$self}--has-fixed-columns &) {
+      height: calc(#{rem(20)} * 28);
     }
   }
 
@@ -567,14 +570,23 @@ html {
     padding-left: rem(5);
     display: flex;
 
-    &::before {
-      position: absolute;
-      top: 0;
-      right: 100%;
-      font-variant-numeric: tabular-nums;
-      counter-increment: li;
-      content: counters(li, ".") ". ";
-    }
+    // &::before {
+    //   position: absolute;
+    //   top: 0;
+    //   right: 100%;
+    //   font-variant-numeric: tabular-nums;
+    //   counter-increment: li;
+    //   content: counters(li, ".") ". ";
+    // }
+  }
+
+  &__counter {
+    position: absolute;
+    top: 0;
+    right: 100%;
+    font-variant-numeric: tabular-nums;
+    counter-increment: li;
+    content: counters(li, ".") ". ";
   }
 
   &__button {
