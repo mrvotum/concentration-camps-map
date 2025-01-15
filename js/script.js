@@ -58,14 +58,11 @@ let activeSound = null;
 
 const topBarFilters = document.querySelectorAll('[top-bar-filter]');
 
-const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
-
 audio.addEventListener('ended', () => {
 	if (activeSound) activeSound.classList.remove('modal__audio--is-active');
 });
 
 const allFiltersButtons = document.querySelectorAll('[data-filter]');
-const allFiltersButtonsImg = Array.from(document.querySelectorAll('[data-filter-img]'));
 const allSvgCamps = Array.from(mapSvg.querySelectorAll('.map__camp'));
 const allSvgCountries = Array.from(mapSvg.querySelectorAll('[country]'));
 
@@ -91,6 +88,10 @@ document.getElementById('close-start-page').addEventListener('click', () => {
 	document.getElementById('start-page').classList.add('page-start--is-hidden');
 	document.getElementById('main-content').classList.remove('main__wrapper--is-hidden');
 });
+
+// Для отладки!!!!!
+// document.getElementById('start-page').classList.add('page-start--is-hidden');
+// document.getElementById('main-content').classList.remove('main__wrapper--is-hidden');
 
 const lockScrollPageToggle = () => {
 	main.classList.toggle('main--is-locked');
@@ -204,7 +205,7 @@ const createCampModal = (data) => {
 	main.appendChild(modalEl);
 }
 
-const createModal = (title, content, classModifier, audioId) => {
+const createModal = (el, title, content, classModifier, audioId) => {
 	const modalEl = createModalElement('div', 'modal');
 	const headerEl = createModalElement('div', 'modal__header');
 	const titleEl = createModalElement('h2', 'modal-title__caption', title);
@@ -221,6 +222,8 @@ const createModal = (title, content, classModifier, audioId) => {
 	closeEl.addEventListener('click', () => {
         lockScrollPageToggle();
 		modalEl.remove();
+		el.classList.remove('top-bar__control--is-active');
+
 		if (audioId) {
 			audioToggler();
 		}
@@ -278,21 +281,22 @@ const createContentForModal = (contentArr, buttonCaptionKey, isShowCampByCountry
 topBarFilters.forEach((button) => {
 	button.addEventListener('click', () => {
 		lockScrollPageToggle();
+		button.classList.add('top-bar__control--is-active');
 
 		switch (button.getAttribute('top-bar-filter')) {
 			case 'countries':
 				const countriesContent = createContentForModal(countries, 'caption', true);
-				createModal('По странам', countriesContent, ['has-fixed-size', 'has-fixed-columns']);
+				createModal(button, 'По странам', countriesContent, ['has-fixed-size', 'has-fixed-columns']);
 				break;
 			case 'alphabet':
 				const alphabetContent = createContentForModal(jsonData, 'name');
-				createModal('По алфавиту', alphabetContent, 'has-fixed-size');
+				createModal(button, 'Список нацистских лагерей по алфавиту', alphabetContent, 'has-fixed-size');
 				break;
 			case 'about':
 				const aboutTextContent = 'Система концлагерей в&nbsp;Германии возникла в&nbsp;1933&ndash;34&nbsp;гг с&nbsp;приходом к&nbsp;власти нацистов и&nbsp;достигла расцвета в&nbsp;период II&nbsp;Мировой войны: более 14&nbsp;000 таких мест было создано на&nbsp;территории рейха и&nbsp;оккупированных стран.<splitTag>Через них прошли, по&nbsp;современным оценкам, не&nbsp;менее 18&nbsp;миллионов человек, каждым пятым узником был ребенок. Приблизительное число жертв &laquo;фабрик смерти&raquo;&nbsp;&mdash; не&nbsp;менее 11&nbsp;миллионов.<splitTag>Нацисты использовали узников для принудительного труда, бесчеловечных &laquo;медицинских&raquo; экспериментов, их&nbsp;подвергали пыткам и&nbsp;издевательствам, не&nbsp;щадя ни&nbsp;женщин, ни&nbsp;детей, ни&nbsp;стариков. А&nbsp;тех, кого считали непригодным для этих целей&nbsp;&mdash; уничтожали.<splitTag>В&nbsp;нашем спецпроекте мы&nbsp;рассказываем истории 55&nbsp;нацистских концлагерей&nbsp;&mdash; для того, чтобы никогда забывать о&nbsp;чудовищной катастрофе, постигшей человечество. Пусть она никогда не&nbsp;повторится!';
 				const aboutContentWrapper = createModalElement('div', false, false, [{style: 'margin-left:7rem;margin-right:3rem;'}]);
 				addAnimation(aboutContentWrapper, aboutTextContent);
-				createModal('О проекте', aboutContentWrapper, false, 'About');
+				createModal(button, 'О проекте', aboutContentWrapper, false, 'About');
 				break;
 			default:
 				break;
@@ -371,27 +375,10 @@ const showCampByFilter = (id) => {
 	});
 };
 
-const changeHoverImg = (filter, isHover) => {
-	const img = allFiltersButtonsImg.filter((img) => filter === img.getAttribute('data-filter-img'))[0];
-
-	img.src = isHover ? `./i/ico_camp_${filter}_h.png` : `./i/ico_camp_${filter}.png`;
-	img.srcset = isHover ? `./i/ico_camp_${filter}_h_2x.png 2x` : `./i/ico_camp_${filter}_2x.png 2x`;
-};
-
 allFiltersButtons.forEach((el) => {
 	el.addEventListener("click", () => {
 		showCampsByFilter(el.getAttribute('data-filter'))
 	});
-
-	if (!isTouchDevice) {
-		el.addEventListener("mouseover", () => {
-			changeHoverImg(el.getAttribute('data-filter'), true);
-		});
-
-		el.addEventListener("mouseout", () => {
-			changeHoverImg(el.getAttribute('data-filter'));
-		});
-	}
 });
 // filters
 

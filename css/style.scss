@@ -202,11 +202,10 @@ html {
   &__control {
     transition: color 0.2s ease-in-out;
 
-    @media (hover: hover) {
-      &:hover {
-        color: #c65634;
-        text-shadow: 1px 0 #c65634;
-      }
+    &--is-active,
+    &:hover {
+      color: #c65634;
+      text-shadow: 1px 0 #c65634;
     }
   }
 
@@ -235,10 +234,29 @@ html {
 }
 
 .filters-control {
+  $self: &;
   width: 100%;
   display: flex;
   align-items: center;
   height: rem(33);
+
+  @media (hover: hover) {
+    &:hover {
+      #{$self}__img {
+        &:not(&--is-hovered) {
+          display: none;
+        }
+      }
+    }
+
+    &:not(&:hover) {
+      #{$self}__img {
+        &--is-hovered {
+          display: none;
+        }
+      }
+    }
+  }
 
   &__ico,
   &__caption {
@@ -447,6 +465,16 @@ html {
     margin-top: rem(12);
     margin-left: rem(15);
 
+    @media (hover: hover) {
+      &:hover {
+        &::before,
+        &::after {
+          background-color: #cc5214;
+          opacity: 1;
+        }
+      }
+    }
+
     &::before,
     &::after {
       position: absolute;
@@ -457,6 +485,7 @@ html {
       border-radius: 2px;
       opacity: 0.8;
       background-color: currentColor;
+      transition: background-color 0.2s ease-in-out;
     }
     
     &::before {
@@ -467,10 +496,6 @@ html {
     &::after {
       width: rem(22);
       height: rem(2);
-    }
-
-    &:not(:hover) {
-      opacity: 0.6;
     }
   }
 

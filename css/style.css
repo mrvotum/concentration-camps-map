@@ -178,11 +178,9 @@ html {
 .top-bar__control {
   transition: color 0.2s ease-in-out;
 }
-@media (hover: hover) {
-  .top-bar__control:hover {
-    color: #c65634;
-    text-shadow: 1px 0 #c65634;
-  }
+.top-bar__control--is-active, .top-bar__control:hover {
+  color: #c65634;
+  text-shadow: 1px 0 #c65634;
 }
 .top-bar__filter:not(:first-child) {
   margin-left: calc(17 / 16 * 1rem);
@@ -208,6 +206,14 @@ html {
   display: flex;
   align-items: center;
   height: calc(33 / 16 * 1rem);
+}
+@media (hover: hover) {
+  .filters-control:hover .filters-control__img:not(.filters-control:hover .filters-control__img--is-hovered) {
+    display: none;
+  }
+  .filters-control:not(.filters-control:hover) .filters-control__img--is-hovered {
+    display: none;
+  }
 }
 .filters-control__ico, .filters-control__caption {
   pointer-events: none;
@@ -383,6 +389,12 @@ html {
   margin-top: calc(12 / 16 * 1rem);
   margin-left: calc(15 / 16 * 1rem);
 }
+@media (hover: hover) {
+  .modal__close:hover::before, .modal__close:hover::after {
+    background-color: #cc5214;
+    opacity: 1;
+  }
+}
 .modal__close::before, .modal__close::after {
   position: absolute;
   content: "";
@@ -392,6 +404,7 @@ html {
   border-radius: 2px;
   opacity: 0.8;
   background-color: currentColor;
+  transition: background-color 0.2s ease-in-out;
 }
 .modal__close::before {
   width: calc(2 / 16 * 1rem);
@@ -400,9 +413,6 @@ html {
 .modal__close::after {
   width: calc(22 / 16 * 1rem);
   height: calc(2 / 16 * 1rem);
-}
-.modal__close:not(:hover) {
-  opacity: 0.6;
 }
 .modal__audio {
   position: relative;
