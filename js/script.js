@@ -89,9 +89,9 @@ document.getElementById('close-start-page').addEventListener('click', () => {
 	document.getElementById('main-content').classList.remove('main__wrapper--is-hidden');
 });
 
-// Для отладки!!!!!
-// document.getElementById('start-page').classList.add('page-start--is-hidden');
-// document.getElementById('main-content').classList.remove('main__wrapper--is-hidden');
+// Для отладки!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+document.getElementById('start-page').classList.add('page-start--is-hidden');
+document.getElementById('main-content').classList.remove('main__wrapper--is-hidden');
 
 const lockScrollPageToggle = () => {
 	main.classList.toggle('main--is-locked');
@@ -129,11 +129,11 @@ const createModalElement = (tag, className, textContent, attributes) => {
 	return tagEl;
 }
 
-const audioToggler = (audioSrc, playButton) => {
+const audioToggler = (isClosing, audioSrc, playButton) => {
 	if (activeSound) {
 		audio.pause();
 		activeSound = null;
-	} else {
+	} else if (!isClosing) {
 		audio.src = `./sound/${audioSrc}.mp3`;
 		audio.play();
 		activeSound = playButton;
@@ -191,12 +191,12 @@ const createCampModal = (data) => {
 
 	closeEl.addEventListener('click', () => {
         lockScrollPageToggle();
-		audioToggler();
+		audioToggler(true);
 		modalEl.remove();
     });
 
 	playEl.addEventListener('click', () => {
-		audioToggler(data.id, playEl);
+		audioToggler(false, data.id, playEl);
     });
 
 	packingElements(headerEl, [titleBlockEl, playEl, closeEl]);
@@ -225,13 +225,13 @@ const createModal = (el, title, content, classModifier, audioId) => {
 		el.classList.remove('top-bar__control--is-active');
 
 		if (audioId) {
-			audioToggler();
+			audioToggler(true);
 		}
     });
 
 	if (audioId) {
 		playEl.addEventListener('click', () => {
-			audioToggler(audioId, playEl);
+			audioToggler(false, audioId, playEl);
 		});
 	} else {
 		playEl.classList.add('modal__audio--is-hidden')
@@ -286,7 +286,7 @@ topBarFilters.forEach((button) => {
 		switch (button.getAttribute('top-bar-filter')) {
 			case 'countries':
 				const countriesContent = createContentForModal(countries, 'caption', true);
-				createModal(button, 'По странам', countriesContent, ['has-fixed-size', 'has-fixed-columns']);
+				createModal(button, 'Список нацистских лагерей по странам', countriesContent, ['has-fixed-size', 'has-fixed-columns']);
 				break;
 			case 'alphabet':
 				const alphabetContent = createContentForModal(jsonData, 'name');
@@ -393,25 +393,41 @@ const createTooltipsData = () => {
 	});
 }
 
+const campFlagSizes = {
+	1: 14,
+	2: 27,
+    3: 41,
+};
+
+const removeTooltip = (tooltip) => {
+	tooltip.remove();
+	tooltip = null;
+}
+
 allSvgCamps.forEach((el) => {
 	el.addEventListener("mouseover", (event) => {
 		let tooltipHtml = el.dataset.tooltip;
 		if (!tooltipHtml) return;
 
-		tooltipElem = createModalElement('div', 'tooltip', tooltipHtml);
+		tooltipElem = createModalElement('div', 'tooltip tooltip-test', tooltipHtml);
 		mapWrapper.appendChild(tooltipElem);
 
-		let left = event.layerX + 15;
-		let top = event.layerY;
+		const left = event.target.getBoundingClientRect().x + campFlagSizes[zoomValue];
+		const top = event.target.getBoundingClientRect().y + campFlagSizes[zoomValue];
 
 		tooltipElem.style.left = left + 'px';
 		tooltipElem.style.top = top + 'px';
 	});
 
+	el.addEventListener("mousedown", () => {
+		if (tooltipElem) {
+			removeTooltip(tooltipElem);
+		}
+	});
+
 	el.addEventListener("mouseout", () => {
 		if (tooltipElem) {
-			tooltipElem.remove();
-			tooltipElem = null;
+			removeTooltip(tooltipElem);
 		}
 	});
 });
@@ -436,12 +452,16 @@ const focusOnElement = (elementId)  => {
 }
 
 const scaleButtons = document.querySelectorAll('[data-scale-button]');
+let zoomValue = 1;
 
 scaleButtons.forEach(button => {
 	button.addEventListener('click', () => {
 		const isZoomIn = button.dataset.scaleButton === 'increase';
 		const zoomBy = isZoomIn ? 2 : 0.5;
-		
+
+		if (isZoomIn && zoomValue !== 3) zoomValue += 1;
+		else if (!isZoomIn && zoomValue !== 1) zoomValue -= 1;
+
 		if (oldCoords.x || oldCoords.y) pz.smoothZoom(oldCoords.x, oldCoords.y, zoomBy);
 		else pz.smoothZoom(1300/2, 480/2, zoomBy);
 	});

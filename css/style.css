@@ -211,9 +211,15 @@ html {
   .filters-control:hover .filters-control__img:not(.filters-control:hover .filters-control__img--is-hovered) {
     display: none;
   }
+  .filters-control:hover .filters-control__img--is-hovered {
+    display: block;
+  }
   .filters-control:not(.filters-control:hover) .filters-control__img--is-hovered {
     display: none;
   }
+}
+.filters-control__img--is-hovered {
+  display: none;
 }
 .filters-control__ico, .filters-control__caption {
   pointer-events: none;
@@ -479,7 +485,7 @@ html {
   width: 100%;
   -moz-column-count: 2;
        column-count: 2;
-  margin-left: calc(36 / 16 * 1rem);
+  margin-left: calc(16 / 16 * 1rem);
   list-style-type: none;
   counter-reset: li;
   position: relative;
@@ -496,16 +502,10 @@ html {
   text-align: start;
   padding-left: calc(5 / 16 * 1rem);
   display: flex;
-}
-.modal__counter {
-  position: absolute;
-  top: 0;
-  right: 100%;
-  font-variant-numeric: tabular-nums;
-  counter-increment: li;
-  content: counters(li, ".") ". ";
+  padding-left: calc(28 / 16 * 1rem);
 }
 .modal__button {
+  position: relative;
   text-align: start;
   transition: color 0.2s ease-in-out;
 }
@@ -513,6 +513,13 @@ html {
   .modal__button:hover {
     color: #cc5214;
   }
+}
+.modal__counter {
+  position: absolute;
+  top: 0;
+  right: calc(100% + calc(5 / 16 * 1rem));
+  font-variant-numeric: tabular-nums;
+  counter-increment: li;
 }
 
 .modal-title {
@@ -568,6 +575,7 @@ html {
   z-index: 1000;
   font-size: calc(18 / 16 * 1rem);
   line-height: calc(18 / 16 * 1rem);
+  pointer-events: none;
 }
 
 .moving-up {

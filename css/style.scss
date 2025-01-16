@@ -246,9 +246,13 @@ html {
         &:not(&--is-hovered) {
           display: none;
         }
+
+        &--is-hovered {
+          display: block;
+        }
       }
     }
-
+    
     &:not(&:hover) {
       #{$self}__img {
         &--is-hovered {
@@ -256,6 +260,10 @@ html {
         }
       }
     }
+  }
+
+  &__img--is-hovered {
+    display: none;
   }
 
   &__ico,
@@ -576,7 +584,7 @@ html {
   &__list {
     width: 100%;
     column-count: 2;
-    margin-left: rem(36);
+    margin-left: rem(16);
     list-style-type: none;
     counter-reset: li;
     position: relative;
@@ -594,27 +602,11 @@ html {
     text-align: start;
     padding-left: rem(5);
     display: flex;
-
-    // &::before {
-    //   position: absolute;
-    //   top: 0;
-    //   right: 100%;
-    //   font-variant-numeric: tabular-nums;
-    //   counter-increment: li;
-    //   content: counters(li, ".") ". ";
-    // }
-  }
-
-  &__counter {
-    position: absolute;
-    top: 0;
-    right: 100%;
-    font-variant-numeric: tabular-nums;
-    counter-increment: li;
-    content: counters(li, ".") ". ";
+    padding-left: rem(28);
   }
 
   &__button {
+    position: relative;
     text-align: start;
     transition: color 0.2s ease-in-out;
 
@@ -623,6 +615,14 @@ html {
         color: #cc5214;
       }
     }
+  }
+
+  &__counter {
+    position: absolute;
+    top: 0;
+    right: calc(100% + #{rem(5)});
+    font-variant-numeric: tabular-nums;
+    counter-increment: li;
   }
 }
 
@@ -685,6 +685,7 @@ html {
   z-index: 1000;
   font-size: rem(18);
   line-height: rem(18);
+  pointer-events: none;
 }
 
 
