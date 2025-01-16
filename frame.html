@@ -22,80 +22,80 @@
         <button type="button" id="close-start-page" class="page-start__btn btn">Смотреть</button>
     </div>
     <div id="main-content" class="main__wrapper main__wrapper--is-hidden">
-        <div class="top-bar">
-            <ul class="top-bar__filters">
-                <li class="top-bar__filter"><button top-bar-filter="countries" class="top-bar__control">По
+        <div class="left-side">
+            <ul class="left-side__filters">
+                <li class="left-side__filter"><button left-side-filter="countries" class="left-side__control">По
                         странам</button></li>
-                <li class="top-bar__filter"><button top-bar-filter="alphabet" class="top-bar__control">По
+                <li class="left-side__filter"><button left-side-filter="alphabet" class="left-side__control">По
                         алфавиту</button></li>
-                <li class="top-bar__filter"><button top-bar-filter="about" class="top-bar__control">О проекте</button>
+                <li class="left-side__filter"><button left-side-filter="about" class="left-side__control">О проекте</button>
                 </li>
             </ul>
-            <h2 class="top-bar__title">Карта нацистских лагерей</h2>
+            <ul id="filters" class="filters">
+                <li class="filters__filter">
+                    <button class="filters-control btn" id="camp-death" data-filter="death">
+                        <span class="filters-control__ico">
+                            <img class="filters-control__img" src="./i/ico_camp_death.png" srcset="./i/ico_camp_death_2x.png 2x" alt="Лагерь смерти">
+                            <img class="filters-control__img filters-control__img--is-hovered" src="./i/ico_camp_death_h.png" srcset="./i/ico_camp_death_h_2x.png 2x" alt="Лагерь смерти">
+                        </span>
+                        <span class="filters-control__caption">Лагеря смерти</span>
+                    </button>
+                </li>
+                <li class="filters__filter">
+                    <button class="filters-control btn" id="camp-concentration" data-filter="concentration">
+                        <span class="filters-control__ico">
+                            <img class="filters-control__img" src="./i/ico_camp_concentration.png" srcset="./i/ico_camp_concentration_2x.png 2x" alt="Лагеря концентрационные"  data-filter-img="concentration">
+                            <img class="filters-control__img filters-control__img--is-hovered" src="./i/ico_camp_concentration_h.png" srcset="./i/ico_camp_concentration_h_2x.png 2x" alt="Лагеря концентрационные"  data-filter-img="concentration">
+                        </span>
+                        <span class="filters-control__caption">Лагеря концентрационные</span>
+                    </button>
+                </li>
+                <li class="filters__filter">
+                    <button class="filters-control btn" id="camp-labor" data-filter="labor">
+                        <span class="filters-control__ico">
+                            <img class="filters-control__img" src="./i/ico_camp_labor.png" srcset="./i/ico_camp_labor_2x.png 2x" alt="Лагеря трудовые" data-filter-img="labor">
+                            <img class="filters-control__img filters-control__img--is-hovered" src="./i/ico_camp_labor_h.png" srcset="./i/ico_camp_labor_h_2x.png 2x" alt="Лагеря трудовые" data-filter-img="labor">
+                        </span>
+                        <span class="filters-control__caption">Лагеря трудовые</span>
+                    </button>
+                </li>
+                <li class="filters__filter">
+                    <button class="filters-control btn" id="camp-prisoners" data-filter="prisoners">
+                        <span class="filters-control__ico">
+                            <img class="filters-control__img" src="./i/ico_camp_prisoners.png" srcset="./i/ico_camp_prisoners_2x.png 2x" alt="Лагеря для военнопленных" data-filter-img="prisoners">
+                            <img class="filters-control__img filters-control__img--is-hovered" src="./i/ico_camp_prisoners_h.png" srcset="./i/ico_camp_prisoners_h_2x.png 2x" alt="Лагеря для военнопленных" data-filter-img="prisoners">
+                        </span>
+                        <span class="filters-control__caption">Лагеря для военнопленных</span>
+                    </button>
+                </li>
+                <li class="filters__filter">
+                    <button class="filters-control btn" id="camp-transit" data-filter="transit">
+                        <span class="filters-control__ico">
+                            <img class="filters-control__img" src="./i/ico_camp_transit.png" srcset="./i/ico_camp_transit_2x.png 2x" alt="Лагеря транзитные" data-filter-img="transit">
+                            <img class="filters-control__img filters-control__img--is-hovered" src="./i/ico_camp_transit_h.png" srcset="./i/ico_camp_transit_h_2x.png 2x" alt="Лагеря транзитные" data-filter-img="transit">
+                        </span>
+                        <span class="filters-control__caption">Лагеря транзитные</span>
+                    </button>
+                </li>
+                <li class="filters__filter">
+                    <button class="filters-control btn" id="camp-all" data-filter="all">
+                        <span class="filters-control__ico">
+                            <img class="filters-control__img" src="./i/ico_camp_all.png" srcset="./i/ico_camp_all_2x.png 2x" alt="Все лагеря на карте" data-filter-img="all">
+                            <img class="filters-control__img filters-control__img--is-hovered" src="./i/ico_camp_all_h.png" srcset="./i/ico_camp_all_h_2x.png 2x" alt="Все лагеря на карте" data-filter-img="all">
+                        </span>
+                        <span class="filters-control__caption">Все лагеря на карте</span>
+                    </button>
+                </li>
+            </ul>
         </div>
-        <ul id="filters" class="filters">
-            <li class="filters__filter">
-                <button class="filters-control btn" id="camp-death" data-filter="death">
-                    <span class="filters-control__ico">
-                        <img class="filters-control__img" src="./i/ico_camp_death.png" srcset="./i/ico_camp_death_2x.png 2x" alt="Лагерь смерти">
-                        <img class="filters-control__img filters-control__img--is-hovered" src="./i/ico_camp_death_h.png" srcset="./i/ico_camp_death_h_2x.png 2x" alt="Лагерь смерти">
-                    </span>
-                    <span class="filters-control__caption">Лагеря смерти</span>
-                </button>
-            </li>
-            <li class="filters__filter">
-                <button class="filters-control btn" id="camp-concentration" data-filter="concentration">
-                    <span class="filters-control__ico">
-                        <img class="filters-control__img" src="./i/ico_camp_concentration.png" srcset="./i/ico_camp_concentration_2x.png 2x" alt="Лагеря концентрационные"  data-filter-img="concentration">
-                        <img class="filters-control__img filters-control__img--is-hovered" src="./i/ico_camp_concentration_h.png" srcset="./i/ico_camp_concentration_h_2x.png 2x" alt="Лагеря концентрационные"  data-filter-img="concentration">
-                    </span>
-                    <span class="filters-control__caption">Лагеря концентрационные</span>
-                </button>
-            </li>
-            <li class="filters__filter">
-                <button class="filters-control btn" id="camp-labor" data-filter="labor">
-                    <span class="filters-control__ico">
-                        <img class="filters-control__img" src="./i/ico_camp_labor.png" srcset="./i/ico_camp_labor_2x.png 2x" alt="Лагеря трудовые" data-filter-img="labor">
-                        <img class="filters-control__img filters-control__img--is-hovered" src="./i/ico_camp_labor_h.png" srcset="./i/ico_camp_labor_h_2x.png 2x" alt="Лагеря трудовые" data-filter-img="labor">
-                    </span>
-                    <span class="filters-control__caption">Лагеря трудовые</span>
-                </button>
-            </li>
-            <li class="filters__filter">
-                <button class="filters-control btn" id="camp-prisoners" data-filter="prisoners">
-                    <span class="filters-control__ico">
-                        <img class="filters-control__img" src="./i/ico_camp_prisoners.png" srcset="./i/ico_camp_prisoners_2x.png 2x" alt="Лагеря для военнопленных" data-filter-img="prisoners">
-                        <img class="filters-control__img filters-control__img--is-hovered" src="./i/ico_camp_prisoners_h.png" srcset="./i/ico_camp_prisoners_h_2x.png 2x" alt="Лагеря для военнопленных" data-filter-img="prisoners">
-                    </span>
-                    <span class="filters-control__caption">Лагеря для военнопленных</span>
-                </button>
-            </li>
-            <li class="filters__filter">
-                <button class="filters-control btn" id="camp-transit" data-filter="transit">
-                    <span class="filters-control__ico">
-                        <img class="filters-control__img" src="./i/ico_camp_transit.png" srcset="./i/ico_camp_transit_2x.png 2x" alt="Лагеря транзитные" data-filter-img="transit">
-                        <img class="filters-control__img filters-control__img--is-hovered" src="./i/ico_camp_transit_h.png" srcset="./i/ico_camp_transit_h_2x.png 2x" alt="Лагеря транзитные" data-filter-img="transit">
-                    </span>
-                    <span class="filters-control__caption">Лагеря транзитные</span>
-                </button>
-            </li>
-            <li class="filters__filter">
-                <button class="filters-control btn" id="camp-all" data-filter="all">
-                    <span class="filters-control__ico">
-                        <img class="filters-control__img" src="./i/ico_camp_all.png" srcset="./i/ico_camp_all_2x.png 2x" alt="Все лагеря на карте" data-filter-img="all">
-                        <img class="filters-control__img filters-control__img--is-hovered" src="./i/ico_camp_all_h.png" srcset="./i/ico_camp_all_h_2x.png 2x" alt="Все лагеря на карте" data-filter-img="all">
-                    </span>
-                    <span class="filters-control__caption">Все лагеря на карте</span>
-                </button>
-            </li>
-        </ul>
+        <h2 class="main__title">Карта нацистских лагерей</h2>
         <div class="scale-buttons">
             <button class="scale-buttons__button" data-scale-button="increase"></button>
             <button class="scale-buttons__button" data-scale-button="decrease"></button>
         </div>
         <div class="wrapper" id="mapWrapper">
             <div id="map" class="map">
-                <svg id="mapSvg" viewBox="1200 175 1423 800" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <svg id="mapSvg" viewBox="1200 190 1423 800" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                     <g opacity="0.9">
                         <g id="UG" country="Yugoslavia">
                             <path
@@ -459,7 +459,7 @@
                                 d="M1984.93 752.329L1985.2 753.198L1984.52 754.285L1982.85 753.741L1982.13 753.307L1981.49 752.437V751.025L1981.22 750.373L1982.9 750.536L1984.25 751.46L1984.34 752.057L1984.93 752.329ZM1980.09 748.146L1981.36 749.069L1979.91 749.504L1978.91 749.069V748.363L1980.09 748.146ZM1832.04 487.21L1834.76 489.166L1835.66 490.524L1836.52 492.969L1836.34 494.218L1834.03 497.913L1837.11 499.053L1838.78 497.043L1841.05 496.228L1843.63 496.446L1847.11 497.587L1849.15 499.923L1850.19 504.812L1849.87 506.333L1848.51 509.05L1843.9 512.146L1840.59 515.841L1836.43 517.416L1841.77 518.503L1843.94 518.829L1845.48 518.122L1847.16 518.883L1846.88 522.306L1842.59 524.37V525.674L1840.5 525.131L1835.84 528.01L1832.04 527.087L1830.73 526.761L1825.84 528.173L1823.31 526.761L1820.69 527.521L1813.76 528.445L1814.35 530.4L1810.41 529.314L1809.24 530.4L1805.3 528.173L1803.81 529.097L1799.83 529.694L1799.37 533.497L1797.84 535.562L1796.21 535.833L1795.08 534.203L1792.77 533.063L1792.14 534.04L1789.87 533.497L1785.66 535.67L1782.5 539.365L1781.14 537.789L1777.75 536.811L1783.09 533.714L1785.3 530.564L1787.25 529.912L1789.38 527.304L1789.96 524.099L1791 524.533L1792.63 523.121V521.328L1797.02 520.622L1800.32 521.436H1804.4L1804.71 519.263L1806.07 518.285L1807.52 514.646L1803.4 517.199L1800.23 517.308L1793.9 514.157L1785.85 513.776L1784.17 512.527L1783.49 511.44L1785.35 509.267L1789.65 508.018L1792.81 506.496L1794.49 503.943L1794.9 498.51L1794.4 497.261L1791.32 497.532L1789.87 497.261L1791.14 494.925L1792.86 493.458L1796.3 491.828L1802.27 491.393L1806.25 490.904L1804.94 487.319L1805.75 482.864L1806.89 479.876L1806.7 477.811L1803.13 478.192L1801.14 476.29L1800.32 474.28L1801.68 470.966L1804.35 468.141L1802.9 467.489L1800.37 466.892L1797.2 468.847L1795.21 469.228L1792.04 467.761L1791.68 469.065L1790.69 470.314L1787.88 469.662L1785.94 468.793L1786.39 466.566L1787.93 464.229L1790.6 459.666L1789.38 458.797L1788.15 456.243L1788.33 454.668L1789.6 454.016L1790.91 452.766L1790.19 449.507L1788.88 450.05L1786.16 452.929L1784.26 453.147L1782 454.994L1781.55 452.277L1782.9 448.909L1784.81 445.269L1785.12 443.639L1783.45 442.39L1782.63 442.064L1781.68 444.02L1779.96 445.649L1777.93 444.617L1779.29 440.923L1781.64 437.989L1782.09 437.12L1781.23 433.426L1782.77 432.882L1783.72 431.579L1781.05 428.319L1782.9 426.091L1785.98 427.015L1787.61 426.472L1785.08 421.582L1789.15 420.496L1787.34 417.345L1789.15 414.9L1792.81 417.236L1796.21 416.639L1799.06 415.715L1802.59 415.443L1805.12 415.552L1806.3 417.182L1805.03 419.029L1797.84 423.484L1795.94 425.277L1794.94 428.047L1795.85 429.243L1799.06 429.405L1802.68 428.917H1805.53L1807.7 429.405L1814.17 428.971L1816.03 431.416L1814.49 434.132L1813.58 436.196L1814.03 436.903L1811.59 441.14L1810.69 441.847L1809.19 444.672L1806.3 446.356L1804.67 446.573L1806.57 447.823L1808.65 448.909L1808.2 448.963L1807.02 450.213L1804.44 450.539L1803.27 451.788L1797.7 451.625L1799.37 453.092H1800.64L1802.68 453.636H1804.49L1806.66 452.223L1808.42 452.06L1810.28 453.092L1812.99 454.179L1815.8 457.819L1817.88 459.286L1818.33 460.372L1818.06 461.893L1819.33 466.946L1820.87 470.423L1822.72 471.672L1825.75 472.324L1828.24 475.91L1831.14 479.767L1831.73 483.19L1830.91 486.395L1832.04 487.21ZM1780.64 461.024L1780.19 458.96L1780.87 456.787L1782.45 456.243L1782.72 459.449L1781.37 461.078L1780.64 461.024ZM1775.21 480.908L1774.53 479.115L1770.42 479.604L1771 477.92L1769.51 476.942L1768.43 475.312L1767.07 474.552L1765.89 476.942L1762.63 478.572L1759.38 477.377L1757.75 475.53L1757.39 473.737L1761.14 471.944L1759.15 470.26L1762.63 469.554L1764.4 466.403L1764.31 464.881L1766.25 464.338L1768.43 463.306L1771.73 462.817L1773.54 463.143L1775.12 463.795L1776.66 463.469L1777.57 464.447L1779.56 469.608L1779.74 470.749L1779.33 472.705L1780.55 475.584L1779.83 477.757L1778.06 479.876L1776.53 480.636L1775.21 480.908Z"
                                 fill="#88837E" class="map__country" stroke="white" stroke-width="0.5"></path>
                             <g id="GB" country="United_Kingdom" filter="url(#filter54_d_191_22)">
-                                <rect id="Olderni" class="map__camp" x="1811" y="527" width="15" height="15" fill="url(#pattern54_191_22)"
+                                <rect id="Olderni" class="map__camp" x="1815" y="530" width="15" height="15" fill="url(#pattern54_191_22)"
                                     shape-rendering="crispEdges"></rect>
                             </g>
                         </g>

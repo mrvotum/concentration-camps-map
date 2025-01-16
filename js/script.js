@@ -48,6 +48,7 @@ const map = document.getElementById('map');
 const mapSvg = document.getElementById('mapSvg');
 const mapWrapper = document.getElementById('mapWrapper');
 const main = document.getElementById('main');
+let activeFilterButton = null;
 
 let oldCoords = {x: 0, y: 0};
 
@@ -56,7 +57,7 @@ let openedModal = null;
 const audio = new Audio();
 let activeSound = null;
 
-const topBarFilters = document.querySelectorAll('[top-bar-filter]');
+const topBarFilters = document.querySelectorAll('[left-side-filter]');
 
 audio.addEventListener('ended', () => {
 	if (activeSound) activeSound.classList.remove('modal__audio--is-active');
@@ -90,8 +91,8 @@ document.getElementById('close-start-page').addEventListener('click', () => {
 });
 
 // Для отладки!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-document.getElementById('start-page').classList.add('page-start--is-hidden');
-document.getElementById('main-content').classList.remove('main__wrapper--is-hidden');
+// document.getElementById('start-page').classList.add('page-start--is-hidden');
+// document.getElementById('main-content').classList.remove('main__wrapper--is-hidden');
 
 const lockScrollPageToggle = () => {
 	main.classList.toggle('main--is-locked');
@@ -141,6 +142,13 @@ const audioToggler = (isClosing, audioSrc, playButton) => {
 
 	if (playButton)	playButton.classList.toggle("modal__audio--is-active");
 }
+
+const removeActiveFilterState = () => {
+	if (activeFilterButton) {
+		activeFilterButton.classList.remove('left-side__control--is-active');
+		activeFilterButton = null;
+	}
+};
 
 const addAnimation = (parent, data) => {
 	data.split('<splitTag>').forEach((paragraph, index) => {
@@ -222,8 +230,7 @@ const createModal = (el, title, content, classModifier, audioId) => {
 	closeEl.addEventListener('click', () => {
         lockScrollPageToggle();
 		modalEl.remove();
-		el.classList.remove('top-bar__control--is-active');
-
+		removeActiveFilterState();
 		if (audioId) {
 			audioToggler(true);
 		}
@@ -265,6 +272,7 @@ const createContentForModal = (contentArr, buttonCaptionKey, isShowCampByCountry
 		buttonEl.addEventListener('click', () => {
 			hideAllCamps();
 			removeModal(openedModal);
+			removeActiveFilterState();
 			isShowCampByCountry ? showCampsInCountry(contentElement.id) : showCampByFilter(contentElement.id);
 			campInCurrentFocus = contentElement.id;
 			focusOnElement(contentElement.id);
@@ -281,9 +289,10 @@ const createContentForModal = (contentArr, buttonCaptionKey, isShowCampByCountry
 topBarFilters.forEach((button) => {
 	button.addEventListener('click', () => {
 		lockScrollPageToggle();
-		button.classList.add('top-bar__control--is-active');
+		button.classList.add('left-side__control--is-active');
+		activeFilterButton = button;
 
-		switch (button.getAttribute('top-bar-filter')) {
+		switch (button.getAttribute('left-side-filter')) {
 			case 'countries':
 				const countriesContent = createContentForModal(countries, 'caption', true);
 				createModal(button, 'Список нацистских лагерей по странам', countriesContent, ['has-fixed-size', 'has-fixed-columns']);
@@ -393,12 +402,6 @@ const createTooltipsData = () => {
 	});
 }
 
-const campFlagSizes = {
-	1: 14,
-	2: 27,
-    3: 41,
-};
-
 const removeTooltip = (tooltip) => {
 	tooltip.remove();
 	tooltip = null;
@@ -409,11 +412,13 @@ allSvgCamps.forEach((el) => {
 		let tooltipHtml = el.dataset.tooltip;
 		if (!tooltipHtml) return;
 
-		tooltipElem = createModalElement('div', 'tooltip tooltip-test', tooltipHtml);
+		tooltipElem = createModalElement('div', 'tooltip', tooltipHtml);
 		mapWrapper.appendChild(tooltipElem);
 
-		const left = event.target.getBoundingClientRect().x + campFlagSizes[zoomValue];
-		const top = event.target.getBoundingClientRect().y + campFlagSizes[zoomValue];
+		currentCampSize = 15 * zoomValue * map.offsetWidth / 1423;
+
+		const left = event.target.getBoundingClientRect().x + currentCampSize;
+		const top = event.target.getBoundingClientRect().y + currentCampSize;
 
 		tooltipElem.style.left = left + 'px';
 		tooltipElem.style.top = top + 'px';
